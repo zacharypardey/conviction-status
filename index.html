@@ -122,7 +122,53 @@ addEventListener('pagehide',saveScroll);
 function setTab(t){if(t===TAB)return;saveScroll();TAB=t;try{localStorage.setItem('cv_tab',t);}catch(e){}if(CUR)render(CUR);restoreScroll(t);}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(b){e.preventDefault();setTab(b.dataset.tab);}});
 const ENV_NAMES={paper:'Paper · simulation',demo:'Demo · Kalshi sandbox',live:'Live · real money'};
-const NAV_NAMES={paper:'Paper',demo:'Demo',live:'Live'};
+const NAV_NAMES={paper:'Paper',demo:'Demo',live:'Live',arb:'Ladder arb'};
+function arbHtml(A){
+ const B=A.bot||null,R=A.recorder||null;
+ if(A.error)return `<p class="bad" style="margin-top:20px">arb payload unavailable: ${A.error}</p>`;
+ const c1=x=>x==null?'—':(100*x).toFixed(2)+'¢';
+ const age=x=>x==null?'—':(x<90?x+'s':(x/60).toFixed(1)+' min')+' ago';
+ const live=B&&B.age_s!=null&&B.age_s<30;
+ const caps=(B&&B.caps)||{};
+ const hits=(B&&B.hits)||[];
+ const rows=hits.length?hits.slice().reverse().map(h=>`<tr><td class="mono">${h.iso||''}</td><td class="mono">${h.bucket||''}</td><td class="num mono">${c1(h.edge)}</td><td class="num mono">${h.usd==null?'—':'$'+(+h.usd).toFixed(2)}</td><td>${h.dry?'<span class="pill">dry</span>':'<span class="pill ok">sent</span>'}${h.unhedged?' <span class="pill bad">unhedged</span>':''}</td></tr>`).join(''):`<tr><td colspan="5" class="small">none yet — no book-verified edge has appeared</td></tr>`;
+ return `
+<div class="grid2">
+ <div class="card"><div class="ch"><span class="ct">Scanner</span><span class="pill ${live?'ok':'bad'}">${live?(B.mode==='live'?'ARMED · LIVE':'armed · dry'):'not running'}</span></div>
+  <dl><dt>state</dt><dd>${B?(B.mode==='live'?'placing real orders when an edge clears the floor':'detecting only, sends nothing'):'—'}</dd>
+  <dt>heartbeat</dt><dd>${B?age(B.age_s):'—'}</dd>
+  <dt>scans</dt><dd>${B?B.scans:'—'}${B&&B.scan_s!=null?` <span class="small">· ${B.scan_s}s each</span>`:''}</dd>
+  <dt>uptime</dt><dd>${B&&B.uptime_s!=null?(B.uptime_s/60).toFixed(0)+' min':'—'}</dd>
+  <dt>trades</dt><dd>${B?B.trades:'—'} <span class="small">of ${caps.max_trades??'—'} allowed</span></dd>
+  <dt>kill switch</dt><dd class="${B&&B.kill?'bad':'ok'}">${B?(B.kill?'ENGAGED · no orders can be sent':'clear'):'—'}</dd></dl></div>
+
+ <div class="card"><div class="ch"><span class="ct">What it is scanning</span></div>
+  <dl><dt>bucket markets</dt><dd>${B?B.buckets:'—'} <span class="small">KXBTC ranges</span></dd>
+  <dt>threshold markets</dt><dd>${B?B.thresholds:'—'} <span class="small">KXBTCD above-K</span></dd>
+  <dt>matched triples</dt><dd>${B?B.triples:'—'} <span class="small">bucket = P(&gt;a) − P(&gt;b)</span></dd>
+  <dt>passed prefilter</dt><dd>${B?B.passed:'—'} <span class="small">sent for book verification</span></dd></dl></div>
+
+ <div class="card"><div class="ch"><span class="ct">Best edge visible</span></div>
+  <dl><dt data-tip="From the /markets list feed, which is stale by a measured median 1c, p90 5c, max 8c. Only a prefilter.">list feed</dt><dd>${B?c1(B.best_list):'—'}</dd>
+  <dt data-tip="Re-priced from orderbook_fp. This is the only price trusted for trading.">order book</dt><dd class="${B&&B.best_book>0?'ok':''}">${B?c1(B.best_book):'—'}</dd>
+  <dt>needs to clear</dt><dd>${caps.min_edge!=null?c1(caps.min_edge):'—'} <span class="small">after fees, all 3 legs</span></dd>
+  <dt>best bucket</dt><dd class="mono small">${(B&&B.best_bucket)||'—'}</dd></dl>
+  <p class="small" style="margin-top:8px">Every one of the 108 candidates found in research came from the stale list feed and <b>not one</b> was ever confirmed on the book. That gap is what this page is watching.</p></div>
+
+ <div class="card"><div class="ch"><span class="ct">Ladder recorder</span><span class="pill ${R&&R.age_s<180?'ok':'bad'}">${R?(R.age_s<180?'recording':'stale'):'absent'}</span></div>
+  <dl><dt>full sweeps</dt><dd>${R?R.polls:'—'}</dd>
+  <dt>fast sub-polls</dt><dd>${R?(R.fast_polls??'—'):'—'} <span class="small">3s on KXBTC/KXBTCD</span></dd>
+  <dt>markets tracked</dt><dd>${R?R.markets:'—'}</dd>
+  <dt>write share</dt><dd>${R&&R.write_share!=null?(100*R.write_share).toFixed(1)+'%':'—'} <span class="small">delta-logged</span></dd>
+  <dt>errors</dt><dd class="${R&&R.errors&&Object.keys(R.errors).length?'bad':'ok'}">${R?(Object.keys(R.errors||{}).length||'none'):'—'}</dd>
+  <dt>last beat</dt><dd>${R?age(R.age_s):'—'}</dd></dl></div>
+</div>
+
+<h2>Opportunities seen</h2>
+<table class="fit"><tr><th>time</th><th>bucket</th><th class="num">edge</th><th class="num">value</th><th>action</th></tr>${rows}</table>
+<p class="small" style="margin-top:10px">A bucket [a,b] pays exactly what P(&gt;a) − P(&gt;b) pays on the threshold ladder — same close, same BRTI settlement. When the two disagree by more than fees the spread is locked whichever way Bitcoin moves. The thin bucket leg is sent first, so if it will not fill nothing else is sent and no position is taken.</p>
+`;}
+
 function explainerHtml(){return `
 <div class="ex">
 <h1 class="exh">How this thing actually works</h1>
@@ -573,15 +619,16 @@ function explainerHtml4(){return `
 </table></div>
 <p class="small" style="margin-top:22px">Every number on this dashboard comes from the same recordings the bots write as they run. Nothing here is typed in by hand.</p>
 </div>`;}
-function render(P){if(!P)return;const baseEnv=P.env||'paper';const hasDemo=!!(P.demo&&(P.demo.crypto_home||P.demo.crypto));const hasLive=!!(P.live&&(P.live.crypto_home||P.live.crypto));if(TAB!=='explainer'){if(baseEnv!=='paper')TAB=baseEnv;else if(TAB==='demo'&&!hasDemo)TAB='paper';}
+function render(P){if(!P)return;const baseEnv=P.env||'paper';const hasDemo=!!(P.demo&&(P.demo.crypto_home||P.demo.crypto));const hasLive=!!(P.live&&(P.live.crypto_home||P.live.crypto));if(TAB!=='explainer'&&TAB!=='arb'){if(baseEnv!=='paper')TAB=baseEnv;else if(TAB==='demo'&&!hasDemo)TAB='paper';}
 const envPills=baseEnv==='paper'?`${[['paper',true],['demo',hasDemo],['live',hasLive]].map(([t,on])=>`<a href="#" data-tab="${t}" class="${TAB===t?'on':''} ${t==='live'?'live':''} ${on?'':'off'}" data-tip="${ENV_NAMES[t]}${on?' — not connected yet':''}">${NAV_NAMES[t]}</a>`).join('')}`:'';
-const tabBar=envPills+`<a href="#" data-tab="explainer" class="${TAB==='explainer'?'on':''}" data-tip="A plain-language tour of how the whole system works: the market, the model, the maths, the brakes.">How it works</a>`;
+const tabBar=envPills+`<a href="#" data-tab="arb" class="${TAB==='arb'?'on':''}" data-tip="The 3-leg ladder arbitrage scanner: what it is scanning right now, the best edge it can see, and whether it has fired.">Ladder arb</a><a href="#" data-tab="explainer" class="${TAB==='explainer'?'on':''}" data-tip="A plain-language tour of how the whole system works: the market, the model, the maths, the brakes.">How it works</a>`;
 if(TAB==='live'&&!hasLive){$('#app').innerHTML=`<div class="top"><div><div class="eyebrow">Bitcoin · Kalshi 15-minute windows · LIVE ACCOUNT</div><h1>Conviction</h1>${tabBar}</div><div style="text-align:right"><a href="#" id="lock">lock</a></div></div><div class="card" style="margin-top:16px"><b>The live account is not connected yet.</b> <span class="small">Plan: run the Kalshi demo for a day, then link the real account here with the same code, one sleeve, a 40-contract cap, the loss brakes and the kill file. This tab fills in the moment the live bot starts.</span></div>`;$('#lock').onclick=e=>{e.preventDefault();sessionStorage.removeItem('pw');localStorage.removeItem('pw');location.reload();};return;}
 const RT=(baseEnv!=='paper')?P:(TAB==='demo'?P.demo:TAB==='live'?P.live:P);const H=RT.crypto_home;const C=RT.crypto||{};const ENVN=TAB;const LIVE=(ENVN!=='paper');const REAL=(ENVN==='live');const ENV=(()=>{try{const hb=Object.values((C.symbols||{}))[0].hb;return (hb.live&&hb.live.env)||null;}catch(e){return null;}})();if(!H||H.error){$('#app').innerHTML=`<div class="top"><div><div class="eyebrow">Bitcoin · Kalshi 15-minute windows</div><h1>Conviction</h1></div></div><p class="bad" style="margin-top:20px">crypto home payload unavailable${H&&H.error?': '+H.error:''}</p>`;return;}
 const PL=H.pool||{};const G=H.gates||[];const sleeves=H.sleeves||[];const shadows=H.shadow||[];const coins=H.coins||{};const syms=Object.keys(coins);const bots=`${PL.bots_live||0}/${PL.bots||0} bot${PL.bots===1?'':'s'} live`;
 const jobs=((LIVE&&RT.jobs)?RT.jobs:(P.jobs||[])).filter(j=>/crypto_mm|conviction|live_server|status_page|watchdog/.test(j.job)).map(j=>`<span class="pill ${j.ok?'ok':'bad'}" data-tip="${j.job}: heartbeat ${j.age_min==null?'never':j.age_min+' min ago'}">${({crypto_mm_btc:'bot',conviction_dashboard:'dashboard',conviction_publish:'publisher',crypto_server:'dashboard',live_server:'main server',status_page:'status page',watchdog:'watchdog'})[j.job]||j.job} ${j.ok?'OK':'DOWN'}</span>`).join(' ');
 const state=PL.halted?`<span class="pill bad">${PL.halted} halted</span>`:PL.half?`<span class="pill bad">${PL.half} at half size</span>`:`<span class="pill ok">full size</span>`;
 const tabs=tabBar;const navEl=$('#nav');if(navEl){navEl.innerHTML=tabs;navEl.hidden=false;}
+if(TAB==='arb'){$('#app').innerHTML=`<div class="top"><div><div class="eyebrow">Kalshi crypto ladders · 3-leg arbitrage</div><h1>Conviction</h1></div></div>`+arbHtml(P.arb||{});return;}
 if(TAB==='explainer'){$('#app').innerHTML=`<div class="top"><div><div class="eyebrow">Bitcoin · Kalshi 15-minute windows</div><h1>Conviction</h1></div></div>`+explainerHtml();return;}
 const top=`<div class="top"><div><div class="eyebrow">Bitcoin · Kalshi 15-minute windows${ENVN==='demo'?' · KALSHI DEMO (mock money)':ENVN==='live'?' · LIVE ACCOUNT (real money)':' · PAPER SIMULATION'}</div><h1>Conviction</h1><p class="small" style="margin:6px 0 0">${LIVE?`<b>${REAL?'Real money':'Mock money'}</b> on Kalshi's ${REAL?'production':'demo sandbox'} environment${REAL?'':' (the real API and order path, play money)'}. Same code and rules as the paper simulation, promoted as a tagged release: one maker sleeve (model) resting one-sided only where the model disagrees with the market by 2¢ or more, 40 contracts per window, loss tiers at −5% and −10% of the invested capital per day, a kill file that cancels everything. Fair value from a live composite of five exchanges.`:`Paper, the staging environment. Bitcoin on Kalshi's 15-minute up/down windows. Two ideas, nothing else: the maker sleeves rest one-sided only where the model disagrees with the market by 2¢ or more, and the taker sleeve crosses the spread once per time band when it disagrees by 6–12¢. Fair value from a live composite of five exchanges.`} ${sleeves.length} ${LIVE?'live':'paper'} sleeve${sleeves.length===1?'':'s'} on ${LIVE?'invested capital of':'a'} $${(LIVE?(PL.start||0):(PL.equity_cfg||PL.start||10000)).toLocaleString()}${LIVE?'':' launch bankroll'}${PL.started?', since '+et(PL.started):''}${PL.hours?' ('+PL.hours+' h)':''} · ${bots} · ${MODE==='live'?'live, streaming every 2 s':'GitHub copy, refreshed every 15 min'} · updated <span id="upd" class="mono">just now</span></p></div><div style="text-align:right"><a href="#" id="lock">lock</a><div style="margin-top:6px">${jobs}</div></div></div>`;
 const SP=PL.split||{};const GB=(SP.given_back||0);const sh=(sleeves[0]&&sleeves[0].split?sleeves[0].split.share:0.5);const perSplit=sleeves.map(x=>`${x.name}: ${x.split?sgx(x.split.reinvested):'—'} reinvested, ${x.split?sgx(x.split.banked):'—'} banked${x.split&&x.split.given_back<0?', '+sgx(x.split.given_back)+' given back':''}`).join(' · ');
