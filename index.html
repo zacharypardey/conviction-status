@@ -533,12 +533,825 @@ function explainerHtml4(){return `
 
 <h3>Reading the t-stat properly</h3>
 <p>The t-stat answers one narrow question: <b>if this strategy had no edge at all, how unusual would a result this good be?</b> It takes the average profit per window and divides it by that average's <i>standard error</i> — how much the average itself would wobble if you could re-run the same number of windows again. A t of 2 means the average sits two wobbles above zero.</p>
+<svg class="dg" viewBox="0 0 400 124" role="img" aria-label="t counts how many wobbles the average sits above zero">
+<line x1="30.0" y1="62.0" x2="375.0" y2="62.0" stroke="var(--ink)" stroke-width="1.2"/>
+<line x1="50.0" y1="57.0" x2="50.0" y2="67.0" stroke="var(--muted)" stroke-width="1"/>
+<text x="50.0" y="80.0" font-size="10" fill="var(--muted)" text-anchor="middle">0</text>
+<line x1="130.0" y1="57.0" x2="130.0" y2="67.0" stroke="var(--muted)" stroke-width="1"/>
+<text x="130.0" y="80.0" font-size="10" fill="var(--muted)" text-anchor="middle">1</text>
+<line x1="210.0" y1="57.0" x2="210.0" y2="67.0" stroke="var(--muted)" stroke-width="1"/>
+<text x="210.0" y="80.0" font-size="10" fill="var(--muted)" text-anchor="middle">2</text>
+<line x1="290.0" y1="57.0" x2="290.0" y2="67.0" stroke="var(--muted)" stroke-width="1"/>
+<text x="290.0" y="80.0" font-size="10" fill="var(--muted)" text-anchor="middle">3</text>
+<line x1="370.0" y1="57.0" x2="370.0" y2="67.0" stroke="var(--muted)" stroke-width="1"/>
+<text x="370.0" y="80.0" font-size="10" fill="var(--muted)" text-anchor="middle">4</text>
+<text x="50.0" y="93.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">zero</text>
+<rect x="52.0" y="38.0" width="76.0" height="10.0" fill="var(--muted)" opacity="0.18"/>
+<text x="90.0" y="35.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">one wobble</text>
+<rect x="132.0" y="38.0" width="76.0" height="10.0" fill="var(--muted)" opacity="0.18"/>
+<text x="170.0" y="35.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">one wobble</text>
+<line x1="242.0" y1="22.0" x2="242.0" y2="67.0" stroke="var(--accent)" stroke-width="2.2"/>
+<circle cx="242.0" cy="62.0" r="4.5" fill="var(--accent)"/>
+<text x="248.0" y="20.0" font-size="10.5" fill="var(--accent)" text-anchor="start">our average</text>
+<text x="200.0" y="112.0" font-size="11" fill="var(--ink)" text-anchor="middle">the average sits 2.4 wobbles above zero, so t = 2.4</text>
+</svg>
+<p class="cap">t is a count. The wobble is the standard error; the question is how many of them fit between zero and our average.</p>
 <p>We compute it on every settled window since the run started, counting windows where a sleeve made no trades as \$0, and we use the sample standard deviation (dividing by <i>n</i> − 1), which is the honest choice for a sample and slightly lowers t when evidence is thin.</p>
+
+<h3>The bottom of the fraction, piece by piece</h3>
+<p>The top of t is easy: the average profit per window. The bottom is where the understanding lives. It is built from two things: <b>s</b>, how much a single window swings, and <b>n</b>, how many windows we have. Here they are one at a time.</p>
+<svg class="dg" viewBox="0 0 400 182" role="img" aria-label="The swing of single windows, from the real 274-window run">
+<rect x="147.0" y="34.0" width="53.4" height="88.0" fill="var(--good)" opacity="0.1"/>
+<circle cx="167.7" cy="64.4" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="226.3" cy="80.3" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="220.7" cy="71.2" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="39.2" cy="83.4" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="113.7" cy="84.5" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="144.1" cy="55.4" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="172.7" cy="72.2" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="82.0" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="75.1" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="74.8" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="83.9" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="77.6" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="82.0" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="77.7" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="79.7" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="73.8" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="79.6" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="82.4" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="78.3" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="80.9" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="80.1" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="72.8" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="81.1" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="79.1" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="75.6" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="72.4" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="82.4" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="77.7" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="80.6" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="82.5" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="80.6" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="83.1" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="76.7" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="81.6" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="77.3" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="83.2" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="82.5" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="73.2" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="73.6" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="74.6" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="83.6" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="77.2" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="79.5" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="75.6" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="78.1" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="76.6" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="76.2" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="79.0" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="79.0" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="82.9" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="80.2" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="83.1" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="82.3" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="83.9" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="80.1" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="74.0" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="82.3" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="83.6" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="82.9" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="78.8" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="80.6" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="74.5" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="82.0" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="78.9" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="75.4" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="72.8" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="82.2" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="83.9" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="73.1" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="81.6" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="76.9" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="73.8" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="75.5" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="81.2" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="82.5" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="72.5" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="79.4" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="72.5" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="80.6" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="76.0" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="82.6" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="83.8" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="78.1" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="84.0" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="75.7" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="72.9" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="79.2" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="72.4" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="74.4" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="76.9" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="79.3" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="73.9" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="72.5" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="201.8" cy="97.1" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="161.2" cy="68.3" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="190.7" cy="101.9" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="220.2" cy="98.6" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="186.3" cy="71.6" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="169.4" cy="75.9" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="163.4" cy="79.0" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="143.4" cy="85.5" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="145.7" cy="83.0" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="246.8" cy="81.1" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="162.3" cy="84.2" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="202.3" cy="100.9" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="186.2" cy="78.4" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="145.9" cy="74.4" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="135.6" cy="89.5" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="167.5" cy="64.4" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="211.5" cy="67.7" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="181.6" cy="102.8" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="250.5" cy="79.1" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="149.9" cy="80.5" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="128.4" cy="52.6" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="139.5" cy="73.6" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="227.5" cy="82.2" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="140.5" cy="53.0" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="197.2" cy="84.0" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="206.2" cy="84.9" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="154.0" cy="55.1" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="191.6" cy="84.6" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="160.0" cy="76.2" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="140.5" cy="87.3" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="176.0" cy="70.3" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="169.5" cy="88.8" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="200.7" cy="90.4" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="130.6" cy="53.2" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="179.5" cy="55.1" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="150.9" cy="87.2" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="159.0" cy="102.1" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="174.6" cy="65.1" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="183.9" cy="75.7" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="156.2" cy="82.8" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="146.7" cy="68.6" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="248.3" cy="70.9" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="138.9" cy="68.3" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="153.0" cy="71.2" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="261.2" cy="83.0" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="168.6" cy="67.6" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="174.7" cy="71.6" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="199.5" cy="92.2" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="155.7" cy="53.4" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="123.7" cy="81.6" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="153.1" cy="90.2" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="362.2" cy="68.1" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="158.5" cy="63.6" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="158.8" cy="93.8" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="182.1" cy="64.4" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="186.3" cy="61.7" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="161.3" cy="74.6" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="269.6" cy="88.3" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="174.6" cy="57.3" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="268.5" cy="68.7" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="146.3" cy="69.4" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="158.7" cy="95.3" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="224.7" cy="74.8" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="148.6" cy="96.5" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="176.0" cy="60.8" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="172.5" cy="69.5" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="163.9" cy="85.8" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="166.2" cy="98.0" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="185.5" cy="75.5" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="150.6" cy="63.7" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="173.8" cy="58.3" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="141.0" cy="79.5" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="163.6" cy="61.9" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="279.0" cy="94.0" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="136.6" cy="95.6" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="181.4" cy="61.5" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="161.7" cy="66.5" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="263.1" cy="94.0" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="178.7" cy="85.4" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="150.3" cy="93.9" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="150.9" cy="70.0" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="164.8" cy="58.7" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="238.6" cy="67.2" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="156.4" cy="93.3" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="189.3" cy="66.1" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="174.4" cy="70.0" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="124.1" cy="73.7" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="194.2" cy="73.8" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="145.1" cy="73.3" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="244.6" cy="99.9" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="153.6" cy="60.1" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="167.0" cy="52.2" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="212.8" cy="101.0" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="106.7" cy="97.8" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="165.2" cy="103.3" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="167.9" cy="74.6" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="150.1" cy="101.4" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="169.9" cy="100.2" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="131.3" cy="63.5" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="158.4" cy="90.8" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="204.4" cy="95.5" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="168.1" cy="86.5" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="175.1" cy="79.0" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="171.0" cy="67.0" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="169.4" cy="69.7" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="172.7" cy="74.7" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="185.3" cy="55.5" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="126.7" cy="82.6" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="160.9" cy="66.9" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="184.7" cy="94.1" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="192.6" cy="54.3" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="146.5" cy="99.0" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="154.6" cy="88.1" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="147.7" cy="100.0" r="2.2" fill="var(--ink)" opacity="0.55"/>
+<circle cx="172.7" cy="82.8" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="82.8" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="78.9" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="72.2" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="80.9" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="74.1" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="75.6" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="80.0" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="78.3" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="77.0" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="83.3" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="79.3" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="76.1" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="75.0" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="82.3" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="77.7" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="81.4" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="76.2" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="74.4" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="78.4" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="81.8" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="74.1" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="81.5" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="83.1" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="81.7" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="81.9" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="72.1" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="79.5" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="82.4" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="72.6" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="75.3" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="75.2" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="78.3" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="77.1" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="77.7" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="81.3" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="72.0" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="72.7" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="73.5" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="73.5" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="72.8" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="83.7" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="82.3" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="73.0" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="78.0" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="75.8" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="75.8" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="76.2" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="79.8" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="79.0" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="76.3" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="74.3" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="75.9" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="73.5" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="78.7" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="80.6" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="76.6" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="73.0" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="74.1" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="76.5" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="79.3" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="81.4" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="76.6" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="81.6" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="79.5" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="77.2" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<circle cx="172.7" cy="76.5" r="2.2" fill="var(--muted)" opacity="0.25"/>
+<line x1="172.7" y1="28.0" x2="172.7" y2="128.0" stroke="var(--muted)" stroke-width="1" stroke-dasharray="2 2"/>
+<line x1="173.7" y1="30.0" x2="173.7" y2="126.0" stroke="var(--accent)" stroke-width="2"/>
+<line x1="147.0" y1="132.0" x2="200.4" y2="132.0" stroke="var(--good)" stroke-width="2"/>
+<line x1="147.0" y1="127.0" x2="147.0" y2="137.0" stroke="var(--good)" stroke-width="2"/>
+<line x1="200.4" y1="127.0" x2="200.4" y2="137.0" stroke="var(--good)" stroke-width="2"/>
+<text x="173.7" y="150.0" font-size="10.5" fill="var(--good)" text-anchor="middle">s ≈ $103: a typical window lands this far from the average</text>
+<text x="178.7" y="26.0" font-size="10" fill="var(--accent)" text-anchor="start">average $3.69</text>
+<text x="362.2" y="44.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">+$730</text>
+<text x="39.2" y="44.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">−$514</text>
+<text x="43.0" y="172.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">−$500</text>
+<text x="172.7" y="172.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">$0</text>
+<text x="302.5" y="172.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">$500</text>
+</svg>
+<p class="cap">Every dot is one real 15-minute window from an earlier 274-window run. 155 windows had no trades and sit at $0; the rest scatter widely. <b>s</b> measures that scatter for a single window.</p>
+<svg class="dg" viewBox="0 0 400 196" role="img" aria-label="Single windows spread widely; averages of 100 windows cluster tightly on the same axis">
+<text x="30.0" y="24.0" font-size="10.5" fill="var(--ink)" text-anchor="start" font-weight="600">single windows</text>
+<text x="30.0" y="104.0" font-size="10.5" fill="var(--ink)" text-anchor="start" font-weight="600">averages of 100 windows, each a different re-run</text>
+<circle cx="172.7" cy="55.0" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="67.9" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="62.0" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="46.8" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="186.3" cy="71.7" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="161.2" cy="50.0" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="51.2" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="65.6" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="190.7" cy="53.2" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="52.3" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="46.1" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="224.7" cy="46.5" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="60.3" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="50.8" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="60.8" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="184.7" cy="54.4" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="56.7" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="70.9" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="57.5" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="60.1" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="138.9" cy="68.3" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="49.1" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="48.3" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="69.4" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="66.9" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="51.0" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="49.3" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="146.3" cy="64.7" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="70.3" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="185.3" cy="49.5" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="206.2" cy="70.6" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="68.7" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="149.9" cy="60.9" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="174.6" cy="55.8" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="46.9" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="45.1" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="156.2" cy="71.0" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="50.7" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="173.8" cy="63.7" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="51.2" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="179.5" cy="67.1" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="226.3" cy="60.7" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="161.7" cy="52.2" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="48.9" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="197.2" cy="64.2" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="136.6" cy="45.9" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="50.4" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="202.3" cy="59.7" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="155.7" cy="67.9" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="61.2" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="51.8" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="145.1" cy="69.7" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="49.7" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="44.5" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="168.1" cy="51.5" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="56.5" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="183.9" cy="45.7" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="48.9" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="54.3" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="60.0" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="362.2" cy="47.7" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="171.0" cy="54.1" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="68.9" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="246.8" cy="71.5" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="62.4" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="63.4" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="169.4" cy="60.4" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="47.9" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="113.7" cy="45.0" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="238.6" cy="44.5" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="167.7" cy="69.5" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="63.6" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="71.0" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="44.6" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="191.6" cy="61.8" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="220.2" cy="57.5" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="64.5" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="145.7" cy="52.9" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="135.6" cy="72.0" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="46.1" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="59.3" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="185.5" cy="64.6" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="69.2" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="150.3" cy="64.6" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="63.7" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="66.2" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="69.6" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="53.9" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="63.2" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="39.2" cy="69.2" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="68.4" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="55.7" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="66.1" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="68.2" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="60.0" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="220.7" cy="61.5" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="54.7" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="154.0" cy="60.3" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="169.5" cy="61.0" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="46.2" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="153.1" cy="61.9" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="71.8" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="139.5" cy="68.6" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="174.6" cy="64.4" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="169.9" cy="54.9" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="64.6" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="175.1" cy="60.3" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="141.0" cy="56.3" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="67.5" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="46.3" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="65.0" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="44.8" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="60.8" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="192.6" cy="57.5" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="150.1" cy="50.4" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="63.6" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="57.9" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="144.1" cy="61.2" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="160.9" cy="69.8" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="172.7" cy="51.2" r="2.2" fill="var(--ink)" opacity="0.5"/>
+<circle cx="170.4" cy="139.2" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="176.0" cy="144.0" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="176.6" cy="149.5" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="173.8" cy="146.3" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="174.5" cy="144.7" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="178.4" cy="140.6" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="173.1" cy="143.1" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="174.1" cy="146.9" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="179.1" cy="145.2" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="177.4" cy="130.1" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="169.9" cy="131.4" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="174.2" cy="135.8" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="172.9" cy="149.1" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="175.8" cy="133.5" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="175.6" cy="145.5" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="171.0" cy="133.1" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="174.4" cy="143.0" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="175.9" cy="146.9" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="170.5" cy="149.7" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="178.0" cy="139.7" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="177.7" cy="140.3" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="172.6" cy="130.0" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="183.1" cy="146.4" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="168.4" cy="131.1" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="179.3" cy="129.0" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="170.0" cy="146.7" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="172.1" cy="138.5" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="173.3" cy="137.1" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="172.6" cy="130.6" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="175.3" cy="148.2" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="174.4" cy="142.5" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="172.7" cy="146.7" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="174.4" cy="135.4" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="170.4" cy="137.5" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="180.2" cy="138.3" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="173.7" cy="128.2" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="174.0" cy="126.5" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="175.4" cy="140.3" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="172.9" cy="134.6" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="171.0" cy="146.2" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="175.1" cy="144.3" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="175.0" cy="142.0" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="173.3" cy="139.8" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="172.6" cy="131.8" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="174.3" cy="140.0" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="173.4" cy="142.0" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="172.3" cy="132.2" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="175.3" cy="137.2" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="176.9" cy="127.7" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="171.3" cy="142.2" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="172.4" cy="136.4" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="172.4" cy="131.2" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="176.0" cy="143.0" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="173.7" cy="145.2" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="173.2" cy="131.2" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="168.8" cy="126.2" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="172.6" cy="140.0" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="174.7" cy="148.8" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="173.4" cy="128.1" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="169.5" cy="145.3" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="174.8" cy="140.5" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="170.6" cy="142.9" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="174.8" cy="126.3" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="170.4" cy="135.5" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="179.4" cy="127.0" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="175.8" cy="148.7" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="172.7" cy="149.7" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="176.6" cy="143.1" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="174.8" cy="140.3" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="173.7" cy="144.6" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="172.9" cy="129.1" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="173.9" cy="149.6" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="170.7" cy="135.3" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="177.8" cy="136.3" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="174.5" cy="126.3" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="171.6" cy="127.9" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="172.9" cy="148.2" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="174.7" cy="130.7" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="174.9" cy="138.1" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<circle cx="173.8" cy="143.4" r="2.2" fill="var(--accent)" opacity="0.55"/>
+<line x1="147.0" y1="82.0" x2="200.4" y2="82.0" stroke="var(--good)" stroke-width="2"/>
+<line x1="147.0" y1="78.0" x2="147.0" y2="86.0" stroke="var(--good)" stroke-width="2"/>
+<line x1="200.4" y1="78.0" x2="200.4" y2="86.0" stroke="var(--good)" stroke-width="2"/>
+<text x="208.4" y="86.0" font-size="10" fill="var(--good)" text-anchor="start">± s ≈ $103</text>
+<line x1="171.0" y1="162.0" x2="176.4" y2="162.0" stroke="var(--accent)" stroke-width="2"/>
+<line x1="171.0" y1="158.0" x2="171.0" y2="166.0" stroke="var(--accent)" stroke-width="2"/>
+<line x1="176.4" y1="158.0" x2="176.4" y2="166.0" stroke="var(--accent)" stroke-width="2"/>
+<text x="192.1" y="166.0" font-size="10" fill="var(--accent)" text-anchor="start">± s/√100 ≈ $10.3</text>
+<line x1="172.7" y1="30.0" x2="172.7" y2="170.0" stroke="var(--muted)" stroke-width="1" stroke-dasharray="2 2"/>
+<text x="43.0" y="186.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">−$500</text>
+<text x="172.7" y="186.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">$0</text>
+<text x="302.5" y="186.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">$500</text>
+</svg>
+<p class="cap">The same windows on the same scale. Any one window swings about ten times more than an <i>average</i> of 100 windows does, because good and bad windows inside the average cancel. That smaller wobble of the average is the <b>standard error</b>: s ÷ √n. It is the thing t divides by.</p>
+<svg class="dg" viewBox="0 0 400 192" role="img" aria-label="The standard error shrinks with the square root of the number of windows">
+<line x1="40.0" y1="150.0" x2="370.0" y2="150.0" stroke="var(--ink)" stroke-width="1"/>
+<line x1="40.0" y1="30.0" x2="40.0" y2="150.0" stroke="var(--ink)" stroke-width="1"/>
+<line x1="36.0" y1="150.0" x2="370.0" y2="150.0" stroke="var(--line)" stroke-width="0.8"/>
+<text x="32.0" y="153.5" font-size="9.5" fill="var(--muted)" text-anchor="end">$0</text>
+<line x1="36.0" y1="116.7" x2="370.0" y2="116.7" stroke="var(--line)" stroke-width="0.8"/>
+<text x="32.0" y="120.2" font-size="9.5" fill="var(--muted)" text-anchor="end">$10</text>
+<line x1="36.0" y1="83.3" x2="370.0" y2="83.3" stroke="var(--line)" stroke-width="0.8"/>
+<text x="32.0" y="86.8" font-size="9.5" fill="var(--muted)" text-anchor="end">$20</text>
+<line x1="36.0" y1="50.0" x2="370.0" y2="50.0" stroke="var(--line)" stroke-width="0.8"/>
+<text x="32.0" y="53.5" font-size="9.5" fill="var(--muted)" text-anchor="end">$30</text>
+<polyline points="40.0,41.5 45.5,46.5 50.9,51.3 56.4,55.9 61.8,60.3 67.3,64.5 72.7,68.5 78.2,72.3 83.6,75.9 89.1,79.3 94.5,82.6 100.0,85.7 105.4,88.7 110.9,91.6 116.3,94.3 121.8,96.9 127.2,99.4 132.7,101.7 138.1,104.0 143.6,106.1 149.1,108.2 154.5,110.1 160.0,112.0 165.4,113.7 170.9,115.4 176.3,117.0 181.8,118.6 187.2,120.0 192.7,121.4 198.1,122.8 203.6,124.0 209.0,125.2 214.5,126.4 219.9,127.5 225.4,128.5 230.8,129.5 236.3,130.5 241.7,131.4 247.2,132.3 252.7,133.1 258.1,133.9 263.6,134.6 269.0,135.3 274.5,136.0 279.9,136.7 285.4,137.3 290.8,137.9 296.3,138.4 301.7,139.0 307.2,139.5 312.6,140.0 318.1,140.4 323.5,140.9 329.0,141.3 334.4,141.7 339.9,142.1 345.3,142.5 350.8,142.8 356.3,143.2 361.7,143.5 367.2,143.8" fill="none" stroke="var(--accent)" stroke-width="2.2"/>
+<circle cx="40.0" cy="41.5" r="3.5" fill="var(--accent)"/>
+<text x="49.0" y="32.5" font-size="9.5" fill="var(--ink)" text-anchor="start">$32.6</text>
+<text x="40.0" y="166.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">10</text>
+<circle cx="132.1" cy="101.5" r="3.5" fill="var(--accent)"/>
+<text x="132.1" y="92.5" font-size="9.5" fill="var(--ink)" text-anchor="middle">$14.6</text>
+<text x="132.1" y="166.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">50</text>
+<circle cx="211.4" cy="125.7" r="3.5" fill="var(--accent)"/>
+<text x="211.4" y="116.7" font-size="9.5" fill="var(--ink)" text-anchor="middle">$7.3</text>
+<text x="211.4" y="166.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">200</text>
+<circle cx="290.7" cy="137.9" r="3.5" fill="var(--accent)"/>
+<text x="290.7" y="128.9" font-size="9.5" fill="var(--ink)" text-anchor="middle">$3.6</text>
+<text x="290.7" y="166.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">800</text>
+<circle cx="370.0" cy="143.9" r="3.5" fill="var(--accent)"/>
+<text x="370.0" y="134.9" font-size="9.5" fill="var(--ink)" text-anchor="middle">$1.8</text>
+<text x="370.0" y="166.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">3,200</text>
+<text x="205.0" y="182.0" font-size="10" fill="var(--muted)" text-anchor="middle">settled windows (n)</text>
+<text x="56.0" y="13.0" font-size="10" fill="var(--ink)" text-anchor="start">wobble of the average (s ÷ √n), with s = $103</text>
+<text x="262.0" y="78.0" font-size="10.5" fill="var(--good)" text-anchor="middle">4× the windows</text>
+<text x="262.0" y="92.0" font-size="10.5" fill="var(--good)" text-anchor="middle">→ half the wobble</text>
+</svg>
+<p class="cap">Evidence gets cheaper slowly. Going from 200 windows to 800 halves the wobble; halving it again needs 3,200. That square root is why a great morning proves so little.</p>
+<svg class="dg" viewBox="0 0 400 206" role="img" aria-label="The same average measured against the wobble at 274 windows and at 3,100 windows">
+<text x="44.0" y="24.0" font-size="10.5" fill="var(--ink)" text-anchor="start" font-weight="600">after 274 windows: one wobble = $6.22</text>
+<text x="372.0" y="24.0" font-size="11.5" fill="var(--ink)" text-anchor="end" font-weight="700">t = 0.6</text>
+<rect x="98.2" y="46.0" width="112.4" height="24.0" fill="var(--good)" opacity="0.3"/>
+<line x1="98.2" y1="46.0" x2="98.2" y2="74.0" stroke="var(--ink)" stroke-width="1.4"/>
+<rect x="210.5" y="46.0" width="112.4" height="24.0" fill="var(--muted)" opacity="0.14"/>
+<line x1="210.5" y1="46.0" x2="210.5" y2="74.0" stroke="var(--muted)" stroke-width="1"/>
+<text x="210.5" y="85.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">1</text>
+<rect x="322.9" y="46.0" width="37.1" height="24.0" fill="var(--good)" opacity="0.3"/>
+<line x1="322.9" y1="46.0" x2="322.9" y2="74.0" stroke="var(--muted)" stroke-width="1"/>
+<text x="322.9" y="85.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">2</text>
+<text x="98.2" y="85.0" font-size="9.5" fill="var(--ink)" text-anchor="middle">0</text>
+<line x1="44.0" y1="70.0" x2="360.0" y2="70.0" stroke="var(--ink)" stroke-width="1"/>
+<line x1="164.8" y1="41.0" x2="164.8" y2="75.0" stroke="var(--accent)" stroke-width="2.6"/>
+<circle cx="164.8" cy="41.0" r="3.5" fill="var(--accent)"/>
+<text x="170.8" y="41.0" font-size="10" fill="var(--accent)" text-anchor="start">$3.69</text>
+<text x="44.0" y="108.0" font-size="10.5" fill="var(--ink)" text-anchor="start" font-weight="600">after 3,100 windows: one wobble = $1.85</text>
+<text x="372.0" y="108.0" font-size="11.5" fill="var(--accent)" text-anchor="end" font-weight="700">t = 2.0</text>
+<rect x="98.2" y="130.0" width="33.4" height="24.0" fill="var(--good)" opacity="0.3"/>
+<line x1="98.2" y1="130.0" x2="98.2" y2="158.0" stroke="var(--ink)" stroke-width="1.4"/>
+<rect x="131.6" y="130.0" width="33.4" height="24.0" fill="var(--muted)" opacity="0.14"/>
+<line x1="131.6" y1="130.0" x2="131.6" y2="158.0" stroke="var(--muted)" stroke-width="1"/>
+<text x="131.6" y="169.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">1</text>
+<rect x="165.0" y="130.0" width="33.4" height="24.0" fill="var(--good)" opacity="0.3"/>
+<line x1="165.0" y1="130.0" x2="165.0" y2="158.0" stroke="var(--muted)" stroke-width="1"/>
+<text x="165.0" y="169.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">2</text>
+<rect x="198.4" y="130.0" width="33.4" height="24.0" fill="var(--muted)" opacity="0.14"/>
+<line x1="198.4" y1="130.0" x2="198.4" y2="158.0" stroke="var(--muted)" stroke-width="1"/>
+<text x="198.4" y="169.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">3</text>
+<rect x="231.8" y="130.0" width="33.4" height="24.0" fill="var(--good)" opacity="0.3"/>
+<line x1="231.8" y1="130.0" x2="231.8" y2="158.0" stroke="var(--muted)" stroke-width="1"/>
+<text x="231.8" y="169.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">4</text>
+<rect x="265.2" y="130.0" width="33.4" height="24.0" fill="var(--muted)" opacity="0.14"/>
+<line x1="265.2" y1="130.0" x2="265.2" y2="158.0" stroke="var(--muted)" stroke-width="1"/>
+<text x="265.2" y="169.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">5</text>
+<rect x="298.6" y="130.0" width="33.4" height="24.0" fill="var(--good)" opacity="0.3"/>
+<line x1="298.6" y1="130.0" x2="298.6" y2="158.0" stroke="var(--muted)" stroke-width="1"/>
+<text x="298.6" y="169.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">6</text>
+<rect x="332.0" y="130.0" width="28.0" height="24.0" fill="var(--muted)" opacity="0.14"/>
+<line x1="332.0" y1="130.0" x2="332.0" y2="158.0" stroke="var(--muted)" stroke-width="1"/>
+<text x="332.0" y="169.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">7</text>
+<text x="98.2" y="169.0" font-size="9.5" fill="var(--ink)" text-anchor="middle">0</text>
+<line x1="44.0" y1="154.0" x2="360.0" y2="154.0" stroke="var(--ink)" stroke-width="1"/>
+<line x1="164.8" y1="125.0" x2="164.8" y2="159.0" stroke="var(--accent)" stroke-width="2.6"/>
+<circle cx="164.8" cy="125.0" r="3.5" fill="var(--accent)"/>
+<text x="170.8" y="125.0" font-size="10" fill="var(--accent)" text-anchor="start">$3.69</text>
+<text x="44.0" y="196.0" font-size="10" fill="var(--muted)" text-anchor="start">numbers under each bar count wobbles from zero</text>
+</svg>
+<p class="cap">Nothing about the strategy changed between these rows. With 274 windows the $3.69 average fits inside its first wobble (t 0.6). With 3,100 windows the wobble is small enough that the same average is two wobbles clear of zero (t 2.0).</p>
 <p class="aside"><b>What it is not.</b> It is not the probability that the strategy works, and it is not the probability that the result is luck. It tells you how often luck <i>on its own</i> would produce a number this high. Those sound identical and are not: if nearly every idea you try is worthless, most of the ideas that clear the bar are still worthless — they are simply the lucky ones.</p>
+<svg class="dg" viewBox="0 0 400 180" role="img" aria-label="The spread of t for strategies with no edge, with the part beyond 2 shaded">
+<polygon points="285.0,140.0 285.0,125.6 287.1,127.0 289.2,128.3 291.4,129.5 293.5,130.5 295.6,131.5 297.8,132.4 299.9,133.3 302.0,134.0 304.1,134.7 306.2,135.3 308.4,135.9 310.5,136.4 312.6,136.8 314.8,137.2 316.9,137.6 319.0,137.9 321.1,138.2 323.2,138.4 325.4,138.6 327.5,138.8 329.6,139.0 331.8,139.1 333.9,139.3 336.0,139.4 338.1,139.5 340.2,139.5 342.4,139.6 344.5,139.7 346.6,139.7 348.8,139.8 350.9,139.8 353.0,139.8 355.1,139.9 357.2,139.9 359.4,139.9 361.5,139.9 363.6,139.9 365.8,139.9 367.9,140.0 370.0,140.0 370.0,140.0" fill="var(--accent)" opacity="0.35"/>
+<polyline points="30.0,140.0 32.1,140.0 34.2,139.9 36.4,139.9 38.5,139.9 40.6,139.9 42.7,139.9 44.9,139.9 47.0,139.8 49.1,139.8 51.2,139.8 53.4,139.7 55.5,139.7 57.6,139.6 59.8,139.5 61.9,139.5 64.0,139.4 66.1,139.3 68.2,139.1 70.4,139.0 72.5,138.8 74.6,138.6 76.8,138.4 78.9,138.2 81.0,137.9 83.1,137.6 85.2,137.2 87.4,136.8 89.5,136.4 91.6,135.9 93.8,135.3 95.9,134.7 98.0,134.0 100.1,133.3 102.3,132.4 104.4,131.5 106.5,130.5 108.6,129.5 110.8,128.3 112.9,127.0 115.0,125.6 117.1,124.1 119.2,122.5 121.4,120.8 123.5,118.9 125.6,117.0 127.7,114.9 129.9,112.7 132.0,110.4 134.1,108.0 136.2,105.5 138.4,102.8 140.5,100.1 142.6,97.2 144.8,94.3 146.9,91.3 149.0,88.2 151.1,85.1 153.2,81.9 155.4,78.7 157.5,75.5 159.6,72.3 161.8,69.0 163.9,65.9 166.0,62.7 168.1,59.7 170.2,56.7 172.4,53.9 174.5,51.1 176.6,48.5 178.8,46.1 180.9,43.9 183.0,41.8 185.1,39.9 187.2,38.3 189.4,36.9 191.5,35.7 193.6,34.8 195.8,34.1 197.9,33.7 200.0,33.6 202.1,33.7 204.2,34.1 206.4,34.8 208.5,35.7 210.6,36.9 212.8,38.3 214.9,39.9 217.0,41.8 219.1,43.9 221.2,46.1 223.4,48.5 225.5,51.1 227.6,53.9 229.8,56.7 231.9,59.7 234.0,62.7 236.1,65.9 238.3,69.0 240.4,72.3 242.5,75.5 244.6,78.7 246.7,81.9 248.9,85.1 251.0,88.2 253.1,91.3 255.2,94.3 257.4,97.2 259.5,100.1 261.6,102.8 263.8,105.5 265.9,108.0 268.0,110.4 270.1,112.7 272.2,114.9 274.4,117.0 276.5,118.9 278.6,120.8 280.8,122.5 282.9,124.1 285.0,125.6 287.1,127.0 289.2,128.3 291.4,129.5 293.5,130.5 295.6,131.5 297.8,132.4 299.9,133.3 302.0,134.0 304.1,134.7 306.2,135.3 308.4,135.9 310.5,136.4 312.6,136.8 314.8,137.2 316.9,137.6 319.0,137.9 321.1,138.2 323.2,138.4 325.4,138.6 327.5,138.8 329.6,139.0 331.8,139.1 333.9,139.3 336.0,139.4 338.1,139.5 340.2,139.5 342.4,139.6 344.5,139.7 346.6,139.7 348.8,139.8 350.9,139.8 353.0,139.8 355.1,139.9 357.2,139.9 359.4,139.9 361.5,139.9 363.6,139.9 365.8,139.9 367.9,140.0 370.0,140.0" fill="none" stroke="var(--ink)" stroke-width="1.8"/>
+<line x1="30.0" y1="140.0" x2="370.0" y2="140.0" stroke="var(--ink)" stroke-width="1"/>
+<text x="72.5" y="156.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">-3</text>
+<text x="115.0" y="156.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">-2</text>
+<text x="157.5" y="156.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">-1</text>
+<text x="200.0" y="156.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">0</text>
+<text x="242.5" y="156.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">1</text>
+<text x="285.0" y="156.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">2</text>
+<text x="327.5" y="156.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">3</text>
+<line x1="285.0" y1="40.0" x2="285.0" y2="140.0" stroke="var(--accent)" stroke-width="1.6" stroke-dasharray="4 3"/>
+<text x="291.0" y="74.0" font-size="10.5" fill="var(--accent)" text-anchor="start">2.3% of no-edge</text>
+<text x="291.0" y="90.0" font-size="10.5" fill="var(--accent)" text-anchor="start">strategies land out</text>
+<text x="291.0" y="106.0" font-size="10.5" fill="var(--accent)" text-anchor="start">here by luck</text>
+<text x="30.0" y="26.0" font-size="10.5" fill="var(--ink)" text-anchor="start" font-weight="600">the t-stats of many strategies that have NO edge</text>
+<text x="200.0" y="172.0" font-size="10" fill="var(--muted)" text-anchor="middle">t</text>
+</svg>
+<p class="cap">If you ran thousands of strategies that truly make nothing, their t-stats would pile up around zero like this. The shaded sliver past 2 is the chance a no-edge strategy looks that good anyway. That is the number the t-stat gives you, and nothing more.</p>
+<svg class="dg" viewBox="0 0 400 184" role="img" aria-label="Out of 100 ideas, the ones that clear t of 2 still include worthless ideas">
+<rect x="34.0" y="34.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="48.0" y="34.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="62.0" y="34.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="76.0" y="34.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="90.0" y="34.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="104.0" y="34.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="118.0" y="34.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="132.0" y="34.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="146.0" y="34.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="160.0" y="34.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="34.0" y="48.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="48.0" y="48.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="62.0" y="48.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="76.0" y="48.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="90.0" y="48.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="104.0" y="48.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="118.0" y="48.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="132.0" y="48.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="146.0" y="48.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="160.0" y="48.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="34.0" y="62.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="48.0" y="62.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="62.0" y="62.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="76.0" y="62.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="90.0" y="62.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="104.0" y="62.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="118.0" y="62.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="132.0" y="62.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="146.0" y="62.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="160.0" y="62.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="34.0" y="76.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="48.0" y="76.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="62.0" y="76.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="76.0" y="76.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="90.0" y="76.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="104.0" y="76.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="118.0" y="76.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="132.0" y="76.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="146.0" y="76.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="160.0" y="76.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="34.0" y="90.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="48.0" y="90.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="62.0" y="90.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="76.0" y="90.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="90.0" y="90.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="104.0" y="90.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="118.0" y="90.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="132.0" y="90.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="146.0" y="90.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="160.0" y="90.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="34.0" y="104.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="32.5" y="102.5" width="15.0" height="15.0" fill="none" stroke="var(--accent)" stroke-width="2.2"/>
+<rect x="48.0" y="104.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="62.0" y="104.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="76.0" y="104.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="90.0" y="104.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="104.0" y="104.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="118.0" y="104.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="132.0" y="104.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="146.0" y="104.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="160.0" y="104.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="34.0" y="118.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="48.0" y="118.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="62.0" y="118.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="76.0" y="118.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="90.0" y="118.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="104.0" y="118.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="118.0" y="118.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="132.0" y="118.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="146.0" y="118.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="160.0" y="118.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="34.0" y="132.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="48.0" y="132.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="62.0" y="132.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="76.0" y="132.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="90.0" y="132.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="104.0" y="132.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="118.0" y="132.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="132.0" y="132.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="130.5" y="130.5" width="15.0" height="15.0" fill="none" stroke="var(--accent)" stroke-width="2.2"/>
+<rect x="146.0" y="132.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="160.0" y="132.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="34.0" y="146.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="48.0" y="146.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="62.0" y="146.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="76.0" y="146.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="90.0" y="146.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="104.0" y="146.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="118.0" y="146.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="132.0" y="146.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="146.0" y="146.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="160.0" y="146.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<rect x="34.0" y="160.0" width="12.0" height="12.0" fill="var(--good)" opacity="0.85"/>
+<rect x="32.5" y="158.5" width="15.0" height="15.0" fill="none" stroke="var(--accent)" stroke-width="2.2"/>
+<rect x="48.0" y="160.0" width="12.0" height="12.0" fill="var(--good)" opacity="0.85"/>
+<rect x="62.0" y="160.0" width="12.0" height="12.0" fill="var(--good)" opacity="0.85"/>
+<rect x="60.5" y="158.5" width="15.0" height="15.0" fill="none" stroke="var(--accent)" stroke-width="2.2"/>
+<rect x="76.0" y="160.0" width="12.0" height="12.0" fill="var(--good)" opacity="0.85"/>
+<rect x="90.0" y="160.0" width="12.0" height="12.0" fill="var(--good)" opacity="0.85"/>
+<rect x="88.5" y="158.5" width="15.0" height="15.0" fill="none" stroke="var(--accent)" stroke-width="2.2"/>
+<rect x="104.0" y="160.0" width="12.0" height="12.0" fill="var(--good)" opacity="0.85"/>
+<rect x="118.0" y="160.0" width="12.0" height="12.0" fill="var(--good)" opacity="0.85"/>
+<rect x="116.5" y="158.5" width="15.0" height="15.0" fill="none" stroke="var(--accent)" stroke-width="2.2"/>
+<rect x="132.0" y="160.0" width="12.0" height="12.0" fill="var(--good)" opacity="0.85"/>
+<rect x="146.0" y="160.0" width="12.0" height="12.0" fill="var(--good)" opacity="0.85"/>
+<rect x="144.5" y="158.5" width="15.0" height="15.0" fill="none" stroke="var(--accent)" stroke-width="2.2"/>
+<rect x="160.0" y="160.0" width="12.0" height="12.0" fill="var(--good)" opacity="0.85"/>
+<rect x="200.0" y="40.0" width="12.0" height="12.0" fill="var(--muted)" opacity="0.28"/>
+<text x="218.0" y="50.0" font-size="10.5" fill="var(--ink)" text-anchor="start">90 ideas with no edge</text>
+<rect x="200.0" y="62.0" width="12.0" height="12.0" fill="var(--good)" opacity="0.85"/>
+<text x="218.0" y="72.0" font-size="10.5" fill="var(--ink)" text-anchor="start">10 ideas that really work</text>
+<rect x="198.5" y="82.5" width="15.0" height="15.0" fill="none" stroke="var(--accent)" stroke-width="2.2"/>
+<text x="218.0" y="94.0" font-size="10.5" fill="var(--ink)" text-anchor="start">cleared t ≥ 2</text>
+<text x="200.0" y="122.0" font-size="10.5" fill="var(--muted)" text-anchor="start">2 worthless ideas pass by luck (2.3%)</text>
+<text x="200.0" y="136.0" font-size="10.5" fill="var(--muted)" text-anchor="start">5 real ideas pass (half of them)</text>
+<text x="200.0" y="158.0" font-size="11" fill="var(--accent)" text-anchor="start" font-weight="700">2 of the 7 winners are worthless</text>
+<text x="30.0" y="22.0" font-size="9.5" fill="var(--muted)" text-anchor="start">illustration</text>
+</svg>
+<p class="cap">An illustration with round numbers, not a measurement. When most ideas are worthless, even a strict bar lets some through, so a passing t is a reason to keep watching, not a verdict.</p>
 
 <h3>One tail or two?</h3>
 <p>The t-stat is just a number; "tails" describe how you read it. A <b>two-tailed</b> reading asks "is the average different from zero in either direction?" A <b>one-tailed</b> reading asks "is it above zero?" We only run a strategy because we think it makes money, so our question is one-sided, and <b>we read the t-stat one-tailed</b>. That makes any given t look roughly twice as convincing as a two-tailed reading would — which is exactly why the bar stays at 2 and does not drift lower.</p>
+<svg class="dg" viewBox="0 0 400 170" role="img" aria-label="One-tailed shades only the right tail beyond 2; two-tailed shades both tails">
+<polygon points="152.2,126.0 152.2,115.7 153.4,116.7 154.6,117.6 155.8,118.5 156.9,119.2 158.1,120.0 159.3,120.6 160.5,121.2 161.7,121.7 162.8,122.2 164.0,122.7 165.2,123.1 166.4,123.4 167.6,123.7 168.8,124.0 169.9,124.3 171.1,124.5 172.3,124.7 173.5,124.9 174.7,125.0 175.8,125.2 177.0,125.3 178.2,125.4 179.4,125.5 180.6,125.5 181.7,125.6 182.9,125.7 184.1,125.7 185.3,125.8 186.5,125.8 187.6,125.8 188.8,125.9 190.0,125.9 190.0,126.0" fill="var(--accent)" opacity="0.4"/>
+<polyline points="20.0,125.9 21.2,125.9 22.4,125.8 23.5,125.8 24.7,125.8 25.9,125.7 27.1,125.7 28.3,125.6 29.4,125.5 30.6,125.5 31.8,125.4 33.0,125.3 34.2,125.2 35.3,125.0 36.5,124.9 37.7,124.7 38.9,124.5 40.1,124.3 41.2,124.0 42.4,123.7 43.6,123.4 44.8,123.1 46.0,122.7 47.2,122.2 48.3,121.7 49.5,121.2 50.7,120.6 51.9,120.0 53.1,119.2 54.2,118.5 55.4,117.6 56.6,116.7 57.8,115.7 59.0,114.6 60.1,113.5 61.3,112.3 62.5,111.0 63.7,109.6 64.9,108.1 66.0,106.5 67.2,104.9 68.4,103.1 69.6,101.3 70.8,99.4 71.9,97.5 73.1,95.5 74.3,93.4 75.5,91.2 76.7,89.0 77.8,86.8 79.0,84.5 80.2,82.2 81.4,79.9 82.6,77.6 83.8,75.3 84.9,73.1 86.1,70.8 87.3,68.6 88.5,66.5 89.7,64.5 90.8,62.5 92.0,60.7 93.2,58.9 94.4,57.3 95.6,55.9 96.7,54.5 97.9,53.4 99.1,52.3 100.3,51.5 101.5,50.9 102.6,50.4 103.8,50.1 105.0,50.0 106.2,50.1 107.4,50.4 108.5,50.9 109.7,51.5 110.9,52.3 112.1,53.4 113.3,54.5 114.4,55.9 115.6,57.3 116.8,58.9 118.0,60.7 119.2,62.5 120.3,64.5 121.5,66.5 122.7,68.6 123.9,70.8 125.1,73.1 126.2,75.3 127.4,77.6 128.6,79.9 129.8,82.2 131.0,84.5 132.2,86.8 133.3,89.0 134.5,91.2 135.7,93.4 136.9,95.5 138.1,97.5 139.2,99.4 140.4,101.3 141.6,103.1 142.8,104.9 144.0,106.5 145.1,108.1 146.3,109.6 147.5,111.0 148.7,112.3 149.9,113.5 151.0,114.6 152.2,115.7 153.4,116.7 154.6,117.6 155.8,118.5 156.9,119.2 158.1,120.0 159.3,120.6 160.5,121.2 161.7,121.7 162.8,122.2 164.0,122.7 165.2,123.1 166.4,123.4 167.6,123.7 168.8,124.0 169.9,124.3 171.1,124.5 172.3,124.7 173.5,124.9 174.7,125.0 175.8,125.2 177.0,125.3 178.2,125.4 179.4,125.5 180.6,125.5 181.7,125.6 182.9,125.7 184.1,125.7 185.3,125.8 186.5,125.8 187.6,125.8 188.8,125.9 190.0,125.9" fill="none" stroke="var(--ink)" stroke-width="1.6"/>
+<line x1="20.0" y1="126.0" x2="190.0" y2="126.0" stroke="var(--ink)" stroke-width="1"/>
+<text x="57.8" y="140.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">-2</text>
+<text x="105.0" y="140.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">0</text>
+<text x="152.2" y="140.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">2</text>
+<polygon points="342.2,126.0 342.2,115.7 343.4,116.7 344.6,117.6 345.8,118.5 346.9,119.2 348.1,120.0 349.3,120.6 350.5,121.2 351.7,121.7 352.8,122.2 354.0,122.7 355.2,123.1 356.4,123.4 357.6,123.7 358.8,124.0 359.9,124.3 361.1,124.5 362.3,124.7 363.5,124.9 364.7,125.0 365.8,125.2 367.0,125.3 368.2,125.4 369.4,125.5 370.6,125.5 371.7,125.6 372.9,125.7 374.1,125.7 375.3,125.8 376.5,125.8 377.6,125.8 378.8,125.9 380.0,125.9 380.0,126.0" fill="var(--accent)" opacity="0.4"/>
+<polygon points="210.0,126.0 210.0,125.9 211.2,125.9 212.4,125.8 213.5,125.8 214.7,125.8 215.9,125.7 217.1,125.7 218.3,125.6 219.4,125.5 220.6,125.5 221.8,125.4 223.0,125.3 224.2,125.2 225.3,125.0 226.5,124.9 227.7,124.7 228.9,124.5 230.1,124.3 231.2,124.0 232.4,123.7 233.6,123.4 234.8,123.1 236.0,122.7 237.2,122.2 238.3,121.7 239.5,121.2 240.7,120.6 241.9,120.0 243.1,119.2 244.2,118.5 245.4,117.6 246.6,116.7 247.8,115.7 247.8,126.0" fill="var(--accent)" opacity="0.4"/>
+<polyline points="210.0,125.9 211.2,125.9 212.4,125.8 213.5,125.8 214.7,125.8 215.9,125.7 217.1,125.7 218.3,125.6 219.4,125.5 220.6,125.5 221.8,125.4 223.0,125.3 224.2,125.2 225.3,125.0 226.5,124.9 227.7,124.7 228.9,124.5 230.1,124.3 231.2,124.0 232.4,123.7 233.6,123.4 234.8,123.1 236.0,122.7 237.2,122.2 238.3,121.7 239.5,121.2 240.7,120.6 241.9,120.0 243.1,119.2 244.2,118.5 245.4,117.6 246.6,116.7 247.8,115.7 249.0,114.6 250.1,113.5 251.3,112.3 252.5,111.0 253.7,109.6 254.9,108.1 256.0,106.5 257.2,104.9 258.4,103.1 259.6,101.3 260.8,99.4 261.9,97.5 263.1,95.5 264.3,93.4 265.5,91.2 266.7,89.0 267.8,86.8 269.0,84.5 270.2,82.2 271.4,79.9 272.6,77.6 273.8,75.3 274.9,73.1 276.1,70.8 277.3,68.6 278.5,66.5 279.7,64.5 280.8,62.5 282.0,60.7 283.2,58.9 284.4,57.3 285.6,55.9 286.7,54.5 287.9,53.4 289.1,52.3 290.3,51.5 291.5,50.9 292.6,50.4 293.8,50.1 295.0,50.0 296.2,50.1 297.4,50.4 298.5,50.9 299.7,51.5 300.9,52.3 302.1,53.4 303.3,54.5 304.4,55.9 305.6,57.3 306.8,58.9 308.0,60.7 309.2,62.5 310.3,64.5 311.5,66.5 312.7,68.6 313.9,70.8 315.1,73.1 316.2,75.3 317.4,77.6 318.6,79.9 319.8,82.2 321.0,84.5 322.2,86.8 323.3,89.0 324.5,91.2 325.7,93.4 326.9,95.5 328.1,97.5 329.2,99.4 330.4,101.3 331.6,103.1 332.8,104.9 334.0,106.5 335.1,108.1 336.3,109.6 337.5,111.0 338.7,112.3 339.9,113.5 341.0,114.6 342.2,115.7 343.4,116.7 344.6,117.6 345.8,118.5 346.9,119.2 348.1,120.0 349.3,120.6 350.5,121.2 351.7,121.7 352.8,122.2 354.0,122.7 355.2,123.1 356.4,123.4 357.6,123.7 358.8,124.0 359.9,124.3 361.1,124.5 362.3,124.7 363.5,124.9 364.7,125.0 365.8,125.2 367.0,125.3 368.2,125.4 369.4,125.5 370.6,125.5 371.7,125.6 372.9,125.7 374.1,125.7 375.3,125.8 376.5,125.8 377.6,125.8 378.8,125.9 380.0,125.9" fill="none" stroke="var(--ink)" stroke-width="1.6"/>
+<line x1="210.0" y1="126.0" x2="380.0" y2="126.0" stroke="var(--ink)" stroke-width="1"/>
+<text x="247.8" y="140.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">-2</text>
+<text x="295.0" y="140.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">0</text>
+<text x="342.2" y="140.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">2</text>
+<text x="105.0" y="26.0" font-size="10.5" fill="var(--ink)" text-anchor="middle" font-weight="600">one-tailed: is it above zero?</text>
+<text x="295.0" y="26.0" font-size="10.5" fill="var(--ink)" text-anchor="middle" font-weight="600">two-tailed: different either way?</text>
+<text x="105.0" y="160.0" font-size="11" fill="var(--accent)" text-anchor="middle" font-weight="700">shaded: 2.3%</text>
+<text x="295.0" y="160.0" font-size="11" fill="var(--accent)" text-anchor="middle" font-weight="700">shaded: 4.6%</text>
+</svg>
+<p class="cap">Same curve, same t of 2. We only care about making money, so we look at the right tail alone. Counting both tails doubles the area, which is why a two-tailed reading makes the same t look half as convincing.</p>
 <p>The table shows, for a strategy with <b>no edge at all</b>, how often luck alone produces a t at least this high. Fewer windows means the swing itself is less certain, so the same t is less convincing early on.</p>
+<svg class="dg" viewBox="0 0 400 168" role="img" aria-label="Chance a no-edge strategy reaches each t, on a log scale">
+<line x1="40.0" y1="140.0" x2="370.0" y2="140.0" stroke="var(--ink)" stroke-width="1"/>
+<line x1="40.0" y1="140.0" x2="370.0" y2="140.0" stroke="var(--line)" stroke-width="0.8"/>
+<text x="36.0" y="143.5" font-size="9.5" fill="var(--muted)" text-anchor="end">0.1%</text>
+<line x1="40.0" y1="99.2" x2="370.0" y2="99.2" stroke="var(--line)" stroke-width="0.8"/>
+<text x="36.0" y="102.7" font-size="9.5" fill="var(--muted)" text-anchor="end">1%</text>
+<line x1="40.0" y1="58.5" x2="370.0" y2="58.5" stroke="var(--line)" stroke-width="0.8"/>
+<text x="36.0" y="62.0" font-size="9.5" fill="var(--muted)" text-anchor="end">10%</text>
+<rect x="49.0" y="38.2" width="12.0" height="101.8" fill="none" stroke="var(--muted)" stroke-width="1.4"/>
+<rect x="63.0" y="38.5" width="12.0" height="101.5" fill="var(--ink)" opacity="0.8"/>
+<text x="69.0" y="33.5" font-size="9" fill="var(--ink)" text-anchor="middle">30.9%</text>
+<text x="62.0" y="156.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">t 0.5</text>
+<rect x="101.0" y="48.9" width="12.0" height="91.1" fill="none" stroke="var(--muted)" stroke-width="1.4"/>
+<rect x="115.0" y="50.3" width="12.0" height="89.7" fill="var(--ink)" opacity="0.8"/>
+<text x="121.0" y="45.3" font-size="9" fill="var(--ink)" text-anchor="middle">15.9%</text>
+<text x="114.0" y="156.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">t 1.0</text>
+<rect x="153.0" y="61.6" width="12.0" height="78.4" fill="none" stroke="var(--muted)" stroke-width="1.4"/>
+<rect x="167.0" y="65.6" width="12.0" height="74.4" fill="var(--ink)" opacity="0.8"/>
+<text x="173.0" y="60.6" font-size="9" fill="var(--ink)" text-anchor="middle">6.7%</text>
+<text x="166.0" y="156.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">t 1.5</text>
+<rect x="205.0" y="75.5" width="12.0" height="64.5" fill="none" stroke="var(--muted)" stroke-width="1.4"/>
+<rect x="219.0" y="84.7" width="12.0" height="55.3" fill="var(--accent)" opacity="0.8"/>
+<text x="225.0" y="79.7" font-size="9" fill="var(--ink)" text-anchor="middle">2.3%</text>
+<text x="218.0" y="156.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">t 2.0</text>
+<rect x="257.0" y="89.9" width="12.0" height="50.1" fill="none" stroke="var(--muted)" stroke-width="1.4"/>
+<rect x="271.0" y="107.7" width="12.0" height="32.3" fill="var(--accent)" opacity="0.8"/>
+<text x="277.0" y="102.7" font-size="9" fill="var(--ink)" text-anchor="middle">0.62%</text>
+<text x="270.0" y="156.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">t 2.5</text>
+<rect x="309.0" y="104.4" width="12.0" height="35.6" fill="none" stroke="var(--muted)" stroke-width="1.4"/>
+<rect x="323.0" y="134.7" width="12.0" height="5.3" fill="var(--accent)" opacity="0.8"/>
+<text x="329.0" y="129.7" font-size="9" fill="var(--ink)" text-anchor="middle">0.13%</text>
+<text x="322.0" y="156.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">t 3.0</text>
+<rect x="250.0" y="22.0" width="10.0" height="10.0" fill="var(--ink)" opacity="0.8"/>
+<text x="264.0" y="31.0" font-size="9.5" fill="var(--muted)" text-anchor="start">300+ windows</text>
+<rect x="250.0" y="37.0" width="10.0" height="10.0" fill="none" stroke="var(--muted)" stroke-width="1.4"/>
+<text x="264.0" y="46.0" font-size="9.5" fill="var(--muted)" text-anchor="start">10 windows</text>
+<text x="40.0" y="13.0" font-size="10" fill="var(--ink)" text-anchor="start">chance a no-edge strategy gets this t (log scale)</text>
+</svg>
+<p class="cap">Each step of half a point makes luck roughly two to four times less likely. The log scale is the only way to show 30% and 0.13% on one chart. The hollow bars are small samples, where the same t is always less convincing.</p>
 <div class="wrap"><table class="stack"><tr><th>t</th><th>roughly means</th><th class="num">10 windows</th><th class="num">50 windows</th><th class="num">300+ windows</th><th class="num">two-tailed, 300+</th></tr>
 <tr><td class="rh">0.5</td><td data-label="roughly means">noise</td><td class="num" data-label="10 windows">31.5%</td><td class="num" data-label="50 windows">31.0%</td><td class="num" data-label="300+ windows">30.9%</td><td class="num" data-label="two-tailed, 300+">61.7%</td></tr>
 <tr><td class="rh">1.0</td><td data-label="roughly means">a hint</td><td class="num" data-label="10 windows">17.2%</td><td class="num" data-label="50 windows">16.1%</td><td class="num" data-label="300+ windows">15.9%</td><td class="num" data-label="two-tailed, 300+">31.7%</td></tr>
@@ -547,11 +1360,121 @@ function explainerHtml4(){return `
 <tr><td class="rh">2.5</td><td data-label="roughly means">strong</td><td class="num" data-label="10 windows">1.7%</td><td class="num" data-label="50 windows">0.8%</td><td class="num" data-label="300+ windows">0.6%</td><td class="num" data-label="two-tailed, 300+">1.2%</td></tr>
 <tr><td class="rh">3.0</td><td data-label="roughly means">very strong</td><td class="num" data-label="10 windows">0.7%</td><td class="num" data-label="50 windows">0.2%</td><td class="num" data-label="300+ windows">0.13%</td><td class="num" data-label="two-tailed, 300+">0.27%</td></tr>
 </table></div>
+<svg class="dg" viewBox="0 0 400 168" role="img" aria-label="With few windows the spread of t has fatter tails, so luck reaches 2 more often">
+<polygon points="285.0,140.0 285.0,123.5 287.1,124.8 289.2,125.9 291.4,127.0 293.5,128.0 295.6,128.9 297.8,129.7 299.9,130.5 302.0,131.3 304.1,132.0 306.2,132.6 308.4,133.2 310.5,133.7 312.6,134.2 314.8,134.7 316.9,135.1 319.0,135.5 321.1,135.8 323.2,136.2 325.4,136.5 327.5,136.8 329.6,137.0 331.8,137.3 333.9,137.5 336.0,137.7 338.1,137.9 340.2,138.0 342.4,138.2 344.5,138.3 346.6,138.5 348.8,138.6 350.9,138.7 353.0,138.8 355.1,138.9 357.2,139.0 359.4,139.1 361.5,139.1 363.6,139.2 365.8,139.3 367.9,139.3 370.0,139.4 370.0,140.0" fill="var(--accent)" opacity="0.3"/>
+<polyline points="30.0,140.0 32.1,140.0 34.2,139.9 36.4,139.9 38.5,139.9 40.6,139.9 42.7,139.9 44.9,139.9 47.0,139.8 49.1,139.8 51.2,139.8 53.4,139.7 55.5,139.7 57.6,139.6 59.8,139.5 61.9,139.5 64.0,139.4 66.1,139.3 68.2,139.1 70.4,139.0 72.5,138.8 74.6,138.6 76.8,138.4 78.9,138.2 81.0,137.9 83.1,137.6 85.2,137.2 87.4,136.8 89.5,136.4 91.6,135.9 93.8,135.3 95.9,134.7 98.0,134.0 100.1,133.3 102.3,132.4 104.4,131.5 106.5,130.5 108.6,129.5 110.8,128.3 112.9,127.0 115.0,125.6 117.1,124.1 119.2,122.5 121.4,120.8 123.5,118.9 125.6,117.0 127.7,114.9 129.9,112.7 132.0,110.4 134.1,108.0 136.2,105.5 138.4,102.8 140.5,100.1 142.6,97.2 144.8,94.3 146.9,91.3 149.0,88.2 151.1,85.1 153.2,81.9 155.4,78.7 157.5,75.5 159.6,72.3 161.8,69.0 163.9,65.9 166.0,62.7 168.1,59.7 170.2,56.7 172.4,53.9 174.5,51.1 176.6,48.5 178.8,46.1 180.9,43.9 183.0,41.8 185.1,39.9 187.2,38.3 189.4,36.9 191.5,35.7 193.6,34.8 195.8,34.1 197.9,33.7 200.0,33.6 202.1,33.7 204.2,34.1 206.4,34.8 208.5,35.7 210.6,36.9 212.8,38.3 214.9,39.9 217.0,41.8 219.1,43.9 221.2,46.1 223.4,48.5 225.5,51.1 227.6,53.9 229.8,56.7 231.9,59.7 234.0,62.7 236.1,65.9 238.3,69.0 240.4,72.3 242.5,75.5 244.6,78.7 246.7,81.9 248.9,85.1 251.0,88.2 253.1,91.3 255.2,94.3 257.4,97.2 259.5,100.1 261.6,102.8 263.8,105.5 265.9,108.0 268.0,110.4 270.1,112.7 272.2,114.9 274.4,117.0 276.5,118.9 278.6,120.8 280.8,122.5 282.9,124.1 285.0,125.6 287.1,127.0 289.2,128.3 291.4,129.5 293.5,130.5 295.6,131.5 297.8,132.4 299.9,133.3 302.0,134.0 304.1,134.7 306.2,135.3 308.4,135.9 310.5,136.4 312.6,136.8 314.8,137.2 316.9,137.6 319.0,137.9 321.1,138.2 323.2,138.4 325.4,138.6 327.5,138.8 329.6,139.0 331.8,139.1 333.9,139.3 336.0,139.4 338.1,139.5 340.2,139.5 342.4,139.6 344.5,139.7 346.6,139.7 348.8,139.8 350.9,139.8 353.0,139.8 355.1,139.9 357.2,139.9 359.4,139.9 361.5,139.9 363.6,139.9 365.8,139.9 367.9,140.0 370.0,140.0" fill="none" stroke="var(--ink)" stroke-width="1.8"/>
+<polyline points="30.0,139.4 32.1,139.3 34.2,139.3 36.4,139.2 38.5,139.1 40.6,139.1 42.7,139.0 44.9,138.9 47.0,138.8 49.1,138.7 51.2,138.6 53.4,138.5 55.5,138.3 57.6,138.2 59.8,138.0 61.9,137.9 64.0,137.7 66.1,137.5 68.2,137.3 70.4,137.0 72.5,136.8 74.6,136.5 76.8,136.2 78.9,135.8 81.0,135.5 83.1,135.1 85.2,134.7 87.4,134.2 89.5,133.7 91.6,133.2 93.8,132.6 95.9,132.0 98.0,131.3 100.1,130.5 102.3,129.7 104.4,128.9 106.5,128.0 108.6,127.0 110.8,125.9 112.9,124.8 115.0,123.5 117.1,122.2 119.2,120.8 121.4,119.3 123.5,117.8 125.6,116.1 127.7,114.3 129.9,112.4 132.0,110.4 134.1,108.3 136.2,106.1 138.4,103.8 140.5,101.4 142.6,98.8 144.8,96.2 146.9,93.5 149.0,90.7 151.1,87.9 153.2,84.9 155.4,81.9 157.5,78.9 159.6,75.8 161.8,72.7 163.9,69.7 166.0,66.6 168.1,63.6 170.2,60.6 172.4,57.7 174.5,55.0 176.6,52.3 178.8,49.8 180.9,47.4 183.0,45.3 185.1,43.3 187.2,41.5 189.4,40.0 191.5,38.8 193.6,37.8 195.8,37.1 197.9,36.7 200.0,36.5 202.1,36.7 204.2,37.1 206.4,37.8 208.5,38.8 210.6,40.0 212.8,41.5 214.9,43.3 217.0,45.3 219.1,47.4 221.2,49.8 223.4,52.3 225.5,55.0 227.6,57.7 229.8,60.6 231.9,63.6 234.0,66.6 236.1,69.7 238.3,72.7 240.4,75.8 242.5,78.9 244.6,81.9 246.7,84.9 248.9,87.9 251.0,90.7 253.1,93.5 255.2,96.2 257.4,98.8 259.5,101.4 261.6,103.8 263.8,106.1 265.9,108.3 268.0,110.4 270.1,112.4 272.2,114.3 274.4,116.1 276.5,117.8 278.6,119.3 280.8,120.8 282.9,122.2 285.0,123.5 287.1,124.8 289.2,125.9 291.4,127.0 293.5,128.0 295.6,128.9 297.8,129.7 299.9,130.5 302.0,131.3 304.1,132.0 306.2,132.6 308.4,133.2 310.5,133.7 312.6,134.2 314.8,134.7 316.9,135.1 319.0,135.5 321.1,135.8 323.2,136.2 325.4,136.5 327.5,136.8 329.6,137.0 331.8,137.3 333.9,137.5 336.0,137.7 338.1,137.9 340.2,138.0 342.4,138.2 344.5,138.3 346.6,138.5 348.8,138.6 350.9,138.7 353.0,138.8 355.1,138.9 357.2,139.0 359.4,139.1 361.5,139.1 363.6,139.2 365.8,139.3 367.9,139.3 370.0,139.4" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-dasharray="5 3"/>
+<line x1="30.0" y1="140.0" x2="370.0" y2="140.0" stroke="var(--ink)" stroke-width="1"/>
+<line x1="285.0" y1="60.0" x2="285.0" y2="140.0" stroke="var(--muted)" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="72.5" y="156.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">-3</text>
+<text x="115.0" y="156.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">-2</text>
+<text x="157.5" y="156.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">-1</text>
+<text x="200.0" y="156.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">0</text>
+<text x="242.5" y="156.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">1</text>
+<text x="285.0" y="156.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">2</text>
+<text x="327.5" y="156.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">3</text>
+<line x1="250.0" y1="24.0" x2="270.0" y2="24.0" stroke="var(--ink)" stroke-width="1.8"/>
+<text x="276.0" y="28.0" font-size="10" fill="var(--ink)" text-anchor="start">300+ windows: 2.3% past 2</text>
+<line x1="250.0" y1="42.0" x2="270.0" y2="42.0" stroke="var(--accent)" stroke-width="1.8" stroke-dasharray="5 3"/>
+<text x="276.0" y="46.0" font-size="10" fill="var(--accent)" text-anchor="start">10 windows: 3.8% past 2</text>
+<text x="293.0" y="110.0" font-size="10" fill="var(--accent)" text-anchor="start">fatter tail</text>
+</svg>
+<p class="cap">With only 10 windows we are also unsure how big the swing is, so the curve of luck is flatter with fatter tails. More of it spills past 2, and the same t deserves less trust early on.</p>
 
 <h3>Why a t of 2 is less safe than that table makes it look</h3>
 <p><b>We look every day.</b> The 2.3% assumes you look once, at the end. We look constantly. We simulated a strategy with no edge, checked once a day: its t touched 2 at least once in <b>8% of 7-day runs, 13% of 30-day runs and 18% of 90-day runs</b>. So a t that <i>touched</i> 2 means far less than one that <i>stays</i> above it.</p>
+<svg class="dg" viewBox="0 0 400 196" role="img" aria-label="Twelve simulated no-edge strategies checked daily; some touch t of 2 by chance">
+<line x1="40.0" y1="100.0" x2="370.0" y2="100.0" stroke="var(--muted)" stroke-width="1"/>
+<line x1="40.0" y1="52.0" x2="370.0" y2="52.0" stroke="var(--accent)" stroke-width="1.4" stroke-dasharray="5 3"/>
+<text x="372.0" y="48.0" font-size="10" fill="var(--accent)" text-anchor="end">t = 2</text>
+<polyline points="40.0,123.1 51.4,112.8 62.8,102.0 74.1,97.0 85.5,84.5 96.9,86.5 108.3,86.6 119.7,90.3 131.0,86.7 142.4,96.0 153.8,92.9 165.2,108.9 176.6,106.8 187.9,96.8 199.3,96.1 210.7,101.1 222.1,99.0 233.4,111.7 244.8,112.8 256.2,123.8 267.6,115.5 279.0,110.1 290.3,117.3 301.7,121.3 313.1,121.9 324.5,122.3 335.9,116.0 347.2,120.7 358.6,115.0 370.0,120.2" fill="none" stroke="var(--muted)" stroke-width="1.1" opacity="0.55"/>
+<polyline points="40.0,39.3 51.4,77.0 62.8,70.6 74.1,70.4 85.5,70.9 96.9,89.6 108.3,91.7 119.7,92.8 131.0,95.0 142.4,86.8 153.8,86.2 165.2,77.9 176.6,82.1 187.9,88.2 199.3,82.0 210.7,80.6 222.1,73.9 233.4,77.9 244.8,79.4 256.2,85.3 267.6,87.4 279.0,87.9 290.3,81.6 301.7,90.0 313.1,86.0 324.5,84.0 335.9,79.8 347.2,81.2 358.6,71.1 370.0,72.0" fill="none" stroke="var(--accent)" stroke-width="1.8" opacity="1"/>
+<polyline points="40.0,70.1 51.4,63.3 62.8,61.8 74.1,51.7 85.5,84.7 96.9,73.9 108.3,76.9 119.7,82.7 131.0,85.7 142.4,75.5 153.8,79.9 165.2,83.0 176.6,74.2 187.9,84.2 199.3,90.7 210.7,92.1 222.1,92.0 233.4,91.2 244.8,93.4 256.2,91.1 267.6,90.8 279.0,88.9 290.3,78.9 301.7,85.0 313.1,83.2 324.5,73.7 335.9,76.5 347.2,70.9 358.6,73.6 370.0,71.8" fill="none" stroke="var(--accent)" stroke-width="1.8" opacity="1"/>
+<polyline points="40.0,92.2 51.4,88.9 62.8,93.2 74.1,90.9 85.5,88.5 96.9,91.2 108.3,93.4 119.7,98.1 131.0,79.8 142.4,87.0 153.8,87.4 165.2,97.8 176.6,100.1 187.9,104.9 199.3,98.3 210.7,98.7 222.1,91.0 233.4,93.5 244.8,85.1 256.2,84.5 267.6,88.7 279.0,82.2 290.3,78.1 301.7,81.4 313.1,78.4 324.5,82.0 335.9,80.6 347.2,79.4 358.6,80.6 370.0,85.1" fill="none" stroke="var(--muted)" stroke-width="1.1" opacity="0.55"/>
+<polyline points="40.0,114.6 51.4,102.4 62.8,118.4 74.1,104.8 85.5,101.5 96.9,111.1 108.3,128.3 119.7,123.4 131.0,145.6 142.4,146.2 153.8,141.0 165.2,144.6 176.6,136.5 187.9,135.8 199.3,140.4 210.7,141.8 222.1,140.3 233.4,144.9 244.8,147.8 256.2,153.9 267.6,140.9 279.0,125.3 290.3,133.5 301.7,123.4 313.1,127.6 324.5,118.0 335.9,115.3 347.2,112.4 358.6,121.0 370.0,120.2" fill="none" stroke="var(--muted)" stroke-width="1.1" opacity="0.55"/>
+<polyline points="40.0,114.1 51.4,106.0 62.8,122.7 74.1,103.6 85.5,109.8 96.9,119.9 108.3,115.0 119.7,108.9 131.0,100.7 142.4,89.8 153.8,84.3 165.2,92.7 176.6,86.4 187.9,87.4 199.3,85.7 210.7,77.4 222.1,77.4 233.4,79.2 244.8,80.8 256.2,81.8 267.6,82.3 279.0,79.1 290.3,76.6 301.7,68.6 313.1,64.4 324.5,60.8 335.9,59.6 347.2,54.4 358.6,55.2 370.0,57.5" fill="none" stroke="var(--muted)" stroke-width="1.1" opacity="0.55"/>
+<polyline points="40.0,129.7 51.4,128.5 62.8,104.0 74.1,120.1 85.5,132.3 96.9,119.0 108.3,119.9 119.7,117.4 131.0,121.5 142.4,124.2 153.8,118.1 165.2,126.3 176.6,141.7 187.9,132.7 199.3,135.5 210.7,134.4 222.1,138.1 233.4,130.7 244.8,129.5 256.2,136.6 267.6,134.7 279.0,131.0 290.3,133.7 301.7,136.4 313.1,133.3 324.5,135.0 335.9,130.9 347.2,142.4 358.6,149.2 370.0,154.5" fill="none" stroke="var(--muted)" stroke-width="1.1" opacity="0.55"/>
+<polyline points="40.0,123.1 51.4,121.8 62.8,107.8 74.1,125.6 85.5,112.2 96.9,135.1 108.3,124.2 119.7,128.2 131.0,126.7 142.4,134.5 153.8,130.5 165.2,124.0 176.6,113.2 187.9,109.7 199.3,124.3 210.7,119.2 222.1,115.3 233.4,123.7 244.8,127.6 256.2,132.3 267.6,136.8 279.0,144.9 290.3,143.8 301.7,142.0 313.1,144.8 324.5,137.8 335.9,134.6 347.2,135.9 358.6,140.4 370.0,140.8" fill="none" stroke="var(--muted)" stroke-width="1.1" opacity="0.55"/>
+<polyline points="40.0,126.0 51.4,91.6 62.8,76.4 74.1,71.1 85.5,66.0 96.9,63.0 108.3,90.7 119.7,91.5 131.0,93.1 142.4,89.7 153.8,85.1 165.2,83.7 176.6,84.0 187.9,93.1 199.3,97.7 210.7,93.1 222.1,84.6 233.4,79.1 244.8,77.3 256.2,77.8 267.6,71.2 279.0,73.9 290.3,71.8 301.7,84.3 313.1,88.8 324.5,84.8 335.9,87.2 347.2,86.5 358.6,76.0 370.0,71.4" fill="none" stroke="var(--muted)" stroke-width="1.1" opacity="0.55"/>
+<polyline points="40.0,128.3 51.4,120.5 62.8,144.2 74.1,135.4 85.5,149.3 96.9,131.7 108.3,119.1 119.7,110.3 131.0,126.5 142.4,121.2 153.8,117.9 165.2,126.2 176.6,119.3 187.9,117.0 199.3,111.5 210.7,118.9 222.1,117.3 233.4,108.7 244.8,115.6 256.2,117.7 267.6,108.0 279.0,111.6 290.3,116.2 301.7,113.2 313.1,111.1 324.5,107.3 335.9,109.4 347.2,109.9 358.6,110.6 370.0,112.2" fill="none" stroke="var(--muted)" stroke-width="1.1" opacity="0.55"/>
+<polyline points="40.0,125.6 51.4,143.2 62.8,125.0 74.1,108.3 85.5,117.9 96.9,99.1 108.3,88.5 119.7,93.0 131.0,93.8 142.4,93.9 153.8,94.6 165.2,95.1 176.6,89.7 187.9,82.2 199.3,87.9 210.7,92.2 222.1,88.9 233.4,93.2 244.8,100.2 256.2,102.0 267.6,103.0 279.0,101.3 290.3,112.0 301.7,110.0 313.1,113.3 324.5,108.9 335.9,105.9 347.2,109.5 358.6,113.7 370.0,111.8" fill="none" stroke="var(--muted)" stroke-width="1.1" opacity="0.55"/>
+<polyline points="40.0,86.8 51.4,113.2 62.8,102.2 74.1,106.2 85.5,104.4 96.9,112.5 108.3,94.8 119.7,100.5 131.0,114.5 142.4,124.8 153.8,137.9 165.2,138.1 176.6,138.1 187.9,135.0 199.3,132.9 210.7,139.7 222.1,145.2 233.4,141.9 244.8,136.4 256.2,136.2 267.6,132.4 279.0,131.9 290.3,136.0 301.7,128.3 313.1,140.5 324.5,136.4 335.9,132.1 347.2,136.5 358.6,140.6 370.0,135.5" fill="none" stroke="var(--muted)" stroke-width="1.1" opacity="0.55"/>
+<text x="34.0" y="151.5" font-size="9.5" fill="var(--muted)" text-anchor="end">-2</text>
+<text x="34.0" y="103.5" font-size="9.5" fill="var(--muted)" text-anchor="end">0</text>
+<text x="34.0" y="55.5" font-size="9.5" fill="var(--muted)" text-anchor="end">2</text>
+<text x="40.0" y="188.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">day 1</text>
+<text x="142.4" y="188.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">day 10</text>
+<text x="256.2" y="188.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">day 20</text>
+<text x="370.0" y="188.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">day 30</text>
+<text x="40.0" y="20.0" font-size="10.5" fill="var(--ink)" text-anchor="start" font-weight="600">12 simulated runs of a strategy with NO edge, checked daily</text>
+</svg>
+<p class="cap">None of these strategies makes a cent, yet 2 of these 12 touched 2 at some point (one sample of 12 runs, chosen to sit close to the true rate). Across thousands of simulated runs, 13% of no-edge strategies touch 2 within 30 days of daily checking. What matters is whether t stays up, not whether it ever got there.</p>
 <p><b>We test many ideas.</b> If twelve worthless strategies are each held to a 2.3% bar, the chance that at least one of them passes by luck is about <b>24%</b>. The more ideas we try, the higher the bar a single winner should have to clear.</p>
-<p><b>Our windows are not tidy coin flips.</b> Single windows have swung from −\$518 to +\$726, and in one run the five best windows alone made more than the entire run's profit. A few windows like that can drag t up or down on their own. In simulations using our real window shapes, a no-edge strategy fell below −2 at some point in 30 days <b>17.5%</b> of the time, against 12.4% for tidy data. Windows on the same day also share a market mood, so they are less independent than the formula assumes — which makes every t on this page somewhat more flattering than the truth.</p>
+<svg class="dg" viewBox="0 0 400 140" role="img" aria-label="Twelve ideas each with a 2.3% false pass add up to a 24% chance at least one passes">
+<rect x="34.0" y="38.0" width="30.0" height="30.0" fill="var(--muted)" opacity="0.22"/>
+<text x="49.0" y="57.0" font-size="8.5" fill="var(--ink)" text-anchor="middle">2.3%</text>
+<rect x="72.0" y="38.0" width="30.0" height="30.0" fill="var(--muted)" opacity="0.22"/>
+<text x="87.0" y="57.0" font-size="8.5" fill="var(--ink)" text-anchor="middle">2.3%</text>
+<rect x="110.0" y="38.0" width="30.0" height="30.0" fill="var(--muted)" opacity="0.22"/>
+<text x="125.0" y="57.0" font-size="8.5" fill="var(--ink)" text-anchor="middle">2.3%</text>
+<rect x="148.0" y="38.0" width="30.0" height="30.0" fill="var(--muted)" opacity="0.22"/>
+<text x="163.0" y="57.0" font-size="8.5" fill="var(--ink)" text-anchor="middle">2.3%</text>
+<rect x="186.0" y="38.0" width="30.0" height="30.0" fill="var(--muted)" opacity="0.22"/>
+<text x="201.0" y="57.0" font-size="8.5" fill="var(--ink)" text-anchor="middle">2.3%</text>
+<rect x="224.0" y="38.0" width="30.0" height="30.0" fill="var(--muted)" opacity="0.22"/>
+<text x="239.0" y="57.0" font-size="8.5" fill="var(--ink)" text-anchor="middle">2.3%</text>
+<rect x="34.0" y="82.0" width="30.0" height="30.0" fill="var(--muted)" opacity="0.22"/>
+<text x="49.0" y="101.0" font-size="8.5" fill="var(--ink)" text-anchor="middle">2.3%</text>
+<rect x="72.0" y="82.0" width="30.0" height="30.0" fill="var(--muted)" opacity="0.22"/>
+<text x="87.0" y="101.0" font-size="8.5" fill="var(--ink)" text-anchor="middle">2.3%</text>
+<rect x="110.0" y="82.0" width="30.0" height="30.0" fill="var(--muted)" opacity="0.22"/>
+<text x="125.0" y="101.0" font-size="8.5" fill="var(--ink)" text-anchor="middle">2.3%</text>
+<rect x="148.0" y="82.0" width="30.0" height="30.0" fill="var(--muted)" opacity="0.22"/>
+<text x="163.0" y="101.0" font-size="8.5" fill="var(--ink)" text-anchor="middle">2.3%</text>
+<rect x="186.0" y="82.0" width="30.0" height="30.0" fill="var(--muted)" opacity="0.22"/>
+<text x="201.0" y="101.0" font-size="8.5" fill="var(--ink)" text-anchor="middle">2.3%</text>
+<rect x="224.0" y="82.0" width="30.0" height="30.0" fill="var(--muted)" opacity="0.22"/>
+<text x="239.0" y="101.0" font-size="8.5" fill="var(--ink)" text-anchor="middle">2.3%</text>
+<text x="125.0" y="26.0" font-size="10.5" fill="var(--ink)" text-anchor="middle" font-weight="600">12 ideas, each with no edge</text>
+<line x1="266.0" y1="82.0" x2="300.0" y2="82.0" stroke="var(--ink)" stroke-width="1.5"/>
+<polygon points="300.0,76.0 310.0,82.0 300.0,88.0" fill="var(--ink)"/>
+<text x="350.0" y="78.0" font-size="22" fill="var(--accent)" text-anchor="middle" font-weight="700">24%</text>
+<text x="350.0" y="100.0" font-size="10" fill="var(--muted)" text-anchor="middle">chance at least</text>
+<text x="350.0" y="113.0" font-size="10" fill="var(--muted)" text-anchor="middle">one passes by luck</text>
+</svg>
+<p class="cap">Small odds add up. Each worthless idea has only a 2.3% chance of fooling us, but test twelve and the chance that at least one does is about one in four.</p>
+<p><b>Our windows are not tidy coin flips.</b> Single windows have swung from −\$514 to +\$730, and in one run the five best windows alone made more than the entire run's profit. A few windows like that can drag t up or down on their own. In simulations using our real window shapes, a no-edge strategy fell below −2 at some point in 30 days <b>17.5%</b> of the time, against 12.4% for tidy data. Windows on the same day also share a market mood, so they are less independent than the formula assumes — which makes every t on this page somewhat more flattering than the truth.</p>
+<svg class="dg" viewBox="0 0 400 166" role="img" aria-label="Real traded windows have more extreme results than a tidy bell curve">
+<rect x="30.5" y="135.7" width="12.1" height="4.3" fill="var(--ink)" opacity="0.55"/>
+<rect x="95.9" y="135.7" width="12.1" height="4.3" fill="var(--ink)" opacity="0.55"/>
+<rect x="109.0" y="135.7" width="12.1" height="4.3" fill="var(--ink)" opacity="0.55"/>
+<rect x="122.0" y="114.0" width="12.1" height="26.0" fill="var(--ink)" opacity="0.55"/>
+<rect x="135.1" y="75.0" width="12.1" height="65.0" fill="var(--ink)" opacity="0.55"/>
+<rect x="148.2" y="49.0" width="12.1" height="91.0" fill="var(--ink)" opacity="0.55"/>
+<rect x="161.3" y="36.0" width="12.1" height="104.0" fill="var(--ink)" opacity="0.55"/>
+<rect x="174.3" y="66.3" width="12.1" height="73.7" fill="var(--ink)" opacity="0.55"/>
+<rect x="187.4" y="101.0" width="12.1" height="39.0" fill="var(--ink)" opacity="0.55"/>
+<rect x="200.5" y="109.7" width="12.1" height="30.3" fill="var(--ink)" opacity="0.55"/>
+<rect x="213.6" y="127.0" width="12.1" height="13.0" fill="var(--ink)" opacity="0.55"/>
+<rect x="226.7" y="127.0" width="12.1" height="13.0" fill="var(--ink)" opacity="0.55"/>
+<rect x="239.7" y="118.3" width="12.1" height="21.7" fill="var(--ink)" opacity="0.55"/>
+<rect x="252.8" y="131.3" width="12.1" height="8.7" fill="var(--ink)" opacity="0.55"/>
+<rect x="265.9" y="131.3" width="12.1" height="8.7" fill="var(--ink)" opacity="0.55"/>
+<rect x="279.0" y="135.7" width="12.1" height="4.3" fill="var(--ink)" opacity="0.55"/>
+<rect x="357.4" y="135.7" width="12.1" height="4.3" fill="var(--ink)" opacity="0.55"/>
+<polyline points="30.0,139.9 32.6,139.9 35.2,139.8 37.8,139.8 40.5,139.7 43.1,139.7 45.7,139.6 48.3,139.5 50.9,139.4 53.5,139.3 56.2,139.1 58.8,138.9 61.4,138.7 64.0,138.5 66.6,138.2 69.2,137.8 71.8,137.4 74.5,137.0 77.1,136.5 79.7,135.9 82.3,135.2 84.9,134.5 87.5,133.7 90.2,132.7 92.8,131.7 95.4,130.6 98.0,129.3 100.6,128.0 103.2,126.5 105.8,124.9 108.5,123.2 111.1,121.4 113.7,119.4 116.3,117.4 118.9,115.2 121.5,112.9 124.2,110.6 126.8,108.2 129.4,105.7 132.0,103.2 134.6,100.6 137.2,98.1 139.8,95.6 142.5,93.1 145.1,90.7 147.7,88.3 150.3,86.1 152.9,84.0 155.5,82.0 158.2,80.3 160.8,78.7 163.4,77.3 166.0,76.2 168.6,75.3 171.2,74.7 173.8,74.4 176.5,74.3 179.1,74.4 181.7,74.9 184.3,75.6 186.9,76.5 189.5,77.7 192.2,79.1 194.8,80.8 197.4,82.6 200.0,84.6 202.6,86.7 205.2,89.0 207.8,91.4 210.5,93.8 213.1,96.3 215.7,98.9 218.3,101.4 220.9,103.9 223.5,106.5 226.2,108.9 228.8,111.3 231.4,113.6 234.0,115.9 236.6,118.0 239.2,120.0 241.8,121.9 244.5,123.7 247.1,125.4 249.7,127.0 252.3,128.4 254.9,129.7 257.5,130.9 260.2,132.0 262.8,133.0 265.4,133.9 268.0,134.7 270.6,135.4 273.2,136.1 275.8,136.6 278.5,137.1 281.1,137.6 283.7,137.9 286.3,138.3 288.9,138.5 291.5,138.8 294.2,139.0 296.8,139.2 299.4,139.3 302.0,139.4 304.6,139.5 307.2,139.6 309.8,139.7 312.5,139.7 315.1,139.8 317.7,139.8 320.3,139.9 322.9,139.9 325.5,139.9 328.2,139.9 330.8,139.9 333.4,140.0 336.0,140.0 338.6,140.0 341.2,140.0 343.8,140.0 346.5,140.0 349.1,140.0 351.7,140.0 354.3,140.0 356.9,140.0 359.5,140.0 362.2,140.0 364.8,140.0 367.4,140.0 370.0,140.0" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-dasharray="5 3"/>
+<line x1="30.0" y1="140.0" x2="370.0" y2="140.0" stroke="var(--ink)" stroke-width="1"/>
+<text x="43.1" y="156.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">−$500</text>
+<text x="173.8" y="156.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">$0</text>
+<text x="304.6" y="156.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">$500</text>
+<text x="364.7" y="129.7" font-size="9.5" fill="var(--ink)" text-anchor="middle">+$730</text>
+<text x="39.3" y="129.7" font-size="9.5" fill="var(--ink)" text-anchor="middle">−$514</text>
+<line x1="230.0" y1="24.0" x2="250.0" y2="24.0" stroke="var(--accent)" stroke-width="1.8" stroke-dasharray="5 3"/>
+<text x="256.0" y="28.0" font-size="10" fill="var(--accent)" text-anchor="start">a tidy bell with the same swing</text>
+<rect x="230.0" y="38.0" width="20.0" height="8.0" fill="var(--ink)" opacity="0.55"/>
+<text x="256.0" y="46.0" font-size="10" fill="var(--ink)" text-anchor="start">119 real traded windows</text>
+</svg>
+<p class="cap">Real results are not a neat bell. Most windows are small, and a few are huge in either direction. Those few can push t up or down on their own, so the textbook odds in the tables above are a little too comforting for us.</p>
 
 <h3>What happens over time</h3>
 <p><b>If the edge is real, t grows with the square root of time.</b> Four times the windows, twice the t. Take a small but genuinely real edge the size the simulation once showed — \$3.69 a window on a \$103 swing, at 96 windows a day:</p>
@@ -565,12 +1488,69 @@ function explainerHtml4(){return `
 </table></div>
 <p>Even if that edge were completely real, a month of running would leave you with only a coin flip's chance of seeing t above 2. A small edge is slow to prove, and patience is not optional.</p>
 <p><b>If there is no edge, t does not grow.</b> It wanders around zero and occasionally strays toward ±2 by chance, then drifts back. So the shape over time is the tell: a real edge climbs roughly like the square root of time and <i>stays</i> up; luck spikes and falls back, like the 2.53 that became 1.02 above.</p>
+<svg class="dg" viewBox="0 0 400 174" role="img" aria-label="A real edge's t climbs with the square root of time; a no-edge strategy's t stays around zero">
+<line x1="40.0" y1="106.7" x2="370.0" y2="106.7" stroke="var(--muted)" stroke-width="1"/>
+<line x1="40.0" y1="63.3" x2="370.0" y2="63.3" stroke="var(--accent)" stroke-width="1.3" stroke-dasharray="5 3"/>
+<polygon points="40.0,85.0 43.7,77.4 47.3,74.2 51.0,71.8 54.7,69.8 58.3,68.0 62.0,66.3 65.7,64.8 69.3,63.5 73.0,62.1 76.7,60.9 80.3,59.7 84.0,58.6 87.7,57.5 91.3,56.5 95.0,55.5 98.7,54.5 102.3,53.6 106.0,52.7 109.7,51.8 113.3,50.9 117.0,50.1 120.7,49.3 124.3,48.5 128.0,47.7 131.7,46.9 135.3,46.2 139.0,45.4 142.7,44.7 146.3,44.0 150.0,43.3 153.7,42.6 157.3,41.9 161.0,41.2 164.7,40.6 168.3,39.9 172.0,39.3 175.7,38.7 179.3,38.0 183.0,37.4 186.7,36.8 190.3,36.2 194.0,35.6 197.7,35.0 201.3,34.5 205.0,33.9 208.7,33.3 212.3,32.8 216.0,32.2 219.7,31.7 223.3,31.1 227.0,30.6 230.7,30.1 234.3,29.5 238.0,29.0 241.7,28.5 245.3,28.0 249.0,27.5 252.7,27.0 256.3,26.5 260.0,26.0 263.7,25.5 267.3,25.0 271.0,24.5 274.7,24.1 278.3,23.6 282.0,23.1 285.7,22.6 289.3,22.2 293.0,21.7 296.7,21.3 300.3,20.8 304.0,20.4 307.7,19.9 311.3,19.5 315.0,19.0 318.7,18.6 322.3,18.2 326.0,17.7 329.7,17.3 333.3,16.9 337.0,16.4 340.7,16.0 344.3,15.6 348.0,15.2 351.7,14.8 355.3,14.4 359.0,14.0 362.7,13.5 366.3,13.1 370.0,12.7 370.0,56.1 366.3,56.5 362.7,56.9 359.0,57.3 355.3,57.7 351.7,58.1 348.0,58.5 344.3,58.9 340.7,59.4 337.0,59.8 333.3,60.2 329.7,60.6 326.0,61.1 322.3,61.5 318.7,61.9 315.0,62.4 311.3,62.8 307.7,63.3 304.0,63.7 300.3,64.1 296.7,64.6 293.0,65.1 289.3,65.5 285.7,66.0 282.0,66.5 278.3,66.9 274.7,67.4 271.0,67.9 267.3,68.4 263.7,68.8 260.0,69.3 256.3,69.8 252.7,70.3 249.0,70.8 245.3,71.3 241.7,71.8 238.0,72.4 234.3,72.9 230.7,73.4 227.0,73.9 223.3,74.5 219.7,75.0 216.0,75.6 212.3,76.1 208.7,76.7 205.0,77.2 201.3,77.8 197.7,78.4 194.0,79.0 190.3,79.6 186.7,80.2 183.0,80.8 179.3,81.4 175.7,82.0 172.0,82.6 168.3,83.3 164.7,83.9 161.0,84.6 157.3,85.2 153.7,85.9 150.0,86.6 146.3,87.3 142.7,88.0 139.0,88.8 135.3,89.5 131.7,90.2 128.0,91.0 124.3,91.8 120.7,92.6 117.0,93.4 113.3,94.3 109.7,95.1 106.0,96.0 102.3,96.9 98.7,97.9 95.0,98.8 91.3,99.8 87.7,100.9 84.0,101.9 80.3,103.1 76.7,104.2 73.0,105.5 69.3,106.8 65.7,108.2 62.0,109.7 58.3,111.3 54.7,113.1 51.0,115.1 47.3,117.6 43.7,120.7 40.0,128.3" fill="var(--good)" opacity="0.16"/>
+<polyline points="40.0,106.7 43.7,99.0 47.3,95.9 51.0,93.5 54.7,91.4 58.3,89.6 62.0,88.0 65.7,86.5 69.3,85.1 73.0,83.8 76.7,82.6 80.3,81.4 84.0,80.3 87.7,79.2 91.3,78.2 95.0,77.2 98.7,76.2 102.3,75.3 106.0,74.3 109.7,73.5 113.3,72.6 117.0,71.8 120.7,70.9 124.3,70.1 128.0,69.3 131.7,68.6 135.3,67.8 139.0,67.1 142.7,66.4 146.3,65.6 150.0,64.9 153.7,64.3 157.3,63.6 161.0,62.9 164.7,62.3 168.3,61.6 172.0,61.0 175.7,60.3 179.3,59.7 183.0,59.1 186.7,58.5 190.3,57.9 194.0,57.3 197.7,56.7 201.3,56.1 205.0,55.6 208.7,55.0 212.3,54.4 216.0,53.9 219.7,53.3 223.3,52.8 227.0,52.3 230.7,51.7 234.3,51.2 238.0,50.7 241.7,50.2 245.3,49.7 249.0,49.2 252.7,48.7 256.3,48.2 260.0,47.7 263.7,47.2 267.3,46.7 271.0,46.2 274.7,45.7 278.3,45.3 282.0,44.8 285.7,44.3 289.3,43.9 293.0,43.4 296.7,42.9 300.3,42.5 304.0,42.0 307.7,41.6 311.3,41.1 315.0,40.7 318.7,40.3 322.3,39.8 326.0,39.4 329.7,39.0 333.3,38.5 337.0,38.1 340.7,37.7 344.3,37.3 348.0,36.9 351.7,36.4 355.3,36.0 359.0,35.6 362.7,35.2 366.3,34.8 370.0,34.4" fill="none" stroke="var(--good)" stroke-width="2.2"/>
+<rect x="40.0" y="85.0" width="330.0" height="43.3" fill="var(--muted)" opacity="0.1"/>
+<line x1="40.0" y1="106.7" x2="370.0" y2="106.7" stroke="var(--muted)" stroke-width="1.4" stroke-dasharray="2 3"/>
+<circle cx="158.7" cy="63.3" r="4" fill="var(--good)"/>
+<text x="166.7" y="78.3" font-size="10" fill="var(--good)" text-anchor="start">expected t reaches 2 around day 32</text>
+<text x="34.0" y="131.8" font-size="9.5" fill="var(--muted)" text-anchor="end">-1</text>
+<text x="34.0" y="110.2" font-size="9.5" fill="var(--muted)" text-anchor="end">0</text>
+<text x="34.0" y="88.5" font-size="9.5" fill="var(--muted)" text-anchor="end">1</text>
+<text x="34.0" y="66.8" font-size="9.5" fill="var(--muted)" text-anchor="end">2</text>
+<text x="34.0" y="45.2" font-size="9.5" fill="var(--muted)" text-anchor="end">3</text>
+<text x="34.0" y="23.5" font-size="9.5" fill="var(--muted)" text-anchor="end">4</text>
+<text x="40.0" y="166.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">day 0</text>
+<text x="150.0" y="166.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">day 30</text>
+<text x="260.0" y="166.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">day 60</text>
+<text x="370.0" y="166.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">day 90</text>
+<text x="372.0" y="48.4" font-size="10.5" fill="var(--good)" text-anchor="end" font-weight="600">real edge: climbs</text>
+<text x="372.0" y="119.7" font-size="10.5" fill="var(--muted)" text-anchor="end" font-weight="600">no edge: wanders around zero</text>
+<text x="40.0" y="18.0" font-size="10" fill="var(--ink)" text-anchor="start">expected t over time, with the range a single run usually stays in</text>
+</svg>
+<p class="cap">For a small real edge ($3.69 a window on a $103 swing), the expected t climbs slowly and only reaches 2 after about a month. The shaded bands are where a single run usually sits. A no-edge strategy's t never trends; it just wanders.</p>
 
 <h3>The paired t: comparing two sleeves</h3>
 <p>When two sleeves trade the same windows — flat and model do — we can compare them window by window: flat's result minus model's. Most of the market's noise hits both at once and cancels out, so the <i>difference</i> swings far less than either sleeve on its own (so far about \$59 a window, against roughly \$103 for one sleeve). A real gap therefore shows up much sooner. If flat were truly \$10 a window better, the paired t would typically read about 1.7 after one day, 2.9 after three and 4.4 after a week.</p>
+<svg class="dg" viewBox="0 0 400 208" role="img" aria-label="Two sleeves move together, so their window-by-window difference is much calmer">
+<line x1="40.0" y1="70.0" x2="370.0" y2="70.0" stroke="var(--muted)" stroke-width="1"/>
+<line x1="40.0" y1="158.0" x2="370.0" y2="158.0" stroke="var(--muted)" stroke-width="1"/>
+<polyline points="40.0,72.0 47.7,48.4 55.3,50.7 63.0,114.0 70.7,93.8 78.4,81.6 86.0,58.3 93.7,74.7 101.4,62.7 109.1,50.8 116.7,64.5 124.4,71.3 132.1,73.8 139.8,81.8 147.4,80.9 155.1,40.1 162.8,74.2 170.5,58.1 178.1,64.6 185.8,80.8 193.5,85.0 201.2,72.1 208.8,54.3 216.5,66.4 224.2,38.6 231.9,79.2 239.5,87.9 247.2,83.4 254.9,47.9 262.6,83.0 270.2,60.1 277.9,56.5 285.6,77.6 293.3,62.4 300.9,75.1 308.6,83.0 316.3,68.7 324.0,71.3 331.6,58.7 339.3,87.0 347.0,67.3 354.7,78.8 362.3,75.5 370.0,69.2" fill="none" stroke="var(--ink)" stroke-width="1.5" opacity="0.9"/>
+<polyline points="40.0,72.0 47.7,60.0 55.3,50.6 63.0,114.0 70.7,93.6 78.4,82.4 86.0,59.9 93.7,74.6 101.4,64.0 109.1,59.3 116.7,68.8 124.4,80.2 132.1,73.6 139.8,80.2 147.4,77.3 155.1,39.7 162.8,73.7 170.5,48.0 178.1,64.6 185.8,86.0 193.5,86.6 201.2,71.0 208.8,55.3 216.5,71.5 224.2,40.1 231.9,80.2 239.5,98.3 247.2,81.4 254.9,44.5 262.6,68.7 270.2,59.9 277.9,48.4 285.6,76.8 293.3,57.1 300.9,73.6 308.6,84.0 316.3,73.6 324.0,72.6 331.6,61.1 339.3,82.1 347.0,72.6 354.7,78.7 362.3,75.6 370.0,69.2" fill="none" stroke="var(--accent)" stroke-width="1.5" opacity="0.8"/>
+<polyline points="40.0,158.0 47.7,169.7 55.3,157.9 63.0,156.9 70.7,157.7 78.4,158.8 86.0,159.6 93.7,157.9 101.4,159.2 109.1,166.5 116.7,162.2 124.4,166.9 132.1,157.8 139.8,156.4 147.4,154.4 155.1,157.6 162.8,157.5 170.5,148.0 178.1,158.1 185.8,163.1 193.5,159.6 201.2,156.9 208.8,159.0 216.5,163.1 224.2,159.5 231.9,158.9 239.5,168.4 247.2,155.9 254.9,154.6 262.6,143.7 270.2,157.8 277.9,149.9 285.6,157.2 293.3,152.7 300.9,156.4 308.6,159.0 316.3,162.9 324.0,159.3 331.6,160.4 339.3,153.1 347.0,163.4 354.7,157.9 362.3,158.1 370.0,158.0" fill="none" stroke="var(--good)" stroke-width="1.8"/>
+<text x="40.0" y="20.0" font-size="10.5" fill="var(--ink)" text-anchor="start" font-weight="600">two near-identical sleeves, window by window</text>
+<line x1="250.0" y1="14.0" x2="266.0" y2="14.0" stroke="var(--ink)" stroke-width="1.5"/>
+<text x="270.0" y="18.0" font-size="10" fill="var(--ink)" text-anchor="start">model</text>
+<line x1="310.0" y1="14.0" x2="326.0" y2="14.0" stroke="var(--accent)" stroke-width="1.5"/>
+<text x="330.0" y="18.0" font-size="10" fill="var(--accent)" text-anchor="start">wide</text>
+<text x="40.0" y="112.0" font-size="10.5" fill="var(--ink)" text-anchor="start" font-weight="600">their difference (wide − model), same scale</text>
+<text x="372.0" y="36.0" font-size="10" fill="var(--muted)" text-anchor="end">swing ≈ $148</text>
+<text x="372.0" y="108.0" font-size="10" fill="var(--good)" text-anchor="end">swing ≈ $46</text>
+</svg>
+<p class="cap">Real windows from an earlier run of two sleeves that differed by one setting. They rose and fell together (correlation 0.95), so the gap between them swings far less than either one. Less wobble means a real difference shows up in days instead of months.</p>
 <p class="aside"><b>The first reading.</b> After its first 10 windows, flat led model with a paired t of <b>1.76</b> — a no-edge result that high turns up about 5.6% of the time at that sample size. Suggestive, pointing the way the idea predicted, and not yet evidence: two of those ten windows produced most of the gap.</p>
 
 <h3>How we act on it</h3>
+<svg class="dg" viewBox="0 0 400 114" role="img" aria-label="What we do at each range of t">
+<rect x="30.0" y="36.0" width="83.0" height="26.0" fill="var(--muted)" opacity="0.18"/>
+<text x="72.5" y="82.0" font-size="10" fill="var(--ink)" text-anchor="middle">no signal</text>
+<rect x="115.0" y="36.0" width="83.0" height="26.0" fill="var(--muted)" opacity="0.35"/>
+<text x="157.5" y="82.0" font-size="10" fill="var(--ink)" text-anchor="middle">keep running</text>
+<rect x="200.0" y="36.0" width="83.0" height="26.0" fill="var(--good)" opacity="0.35"/>
+<text x="242.5" y="82.0" font-size="10" fill="var(--ink)" text-anchor="middle">probably real, if it holds</text>
+<rect x="285.0" y="36.0" width="83.0" height="26.0" fill="var(--good)" opacity="0.8"/>
+<text x="327.5" y="82.0" font-size="10" fill="var(--ink)" text-anchor="middle">strong</text>
+<text x="30.0" y="28.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">t 0</text>
+<text x="115.0" y="28.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">t 1</text>
+<text x="200.0" y="28.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">t 2</text>
+<text x="285.0" y="28.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">t 3</text>
+<text x="370.0" y="28.0" font-size="9.5" fill="var(--muted)" text-anchor="middle">4+</text>
+<text x="200.0" y="104.0" font-size="10" fill="var(--muted)" text-anchor="middle">and none of it counts without 200+ windows and several days of checks</text>
+</svg>
+<p class="cap">How the rules below line up on one scale.</p>
 <ul class="legend">
 <li><b>t below 1</b> — no signal. Ignore the P&amp;L, however good it looks.</li>
 <li><b>t between 1 and 2</b> — keep running, change nothing. Changing anything restarts the clock.</li>
