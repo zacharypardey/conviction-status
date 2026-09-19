@@ -1,0 +1,44 @@
+# Conviction's off-laptop alarm (to-do #9, 2026-09-19): the Mac publishes this repo's status.enc.json every 15 minutes. If no
+# publish lands for 40 minutes, the Mac is asleep, offline, or its publisher stopped - and every bot on it (paper, sandbox,
+# live) is paused or unwatched, including the local watchdog. This runs on GitHub's machines, so it notices exactly that.
+# Alerts go to the same ntfy topic as the watchdog, read from the repository secret NTFY_TOPIC (set by Zack; never in the repo):
+#   gh secret set NTFY_TOPIC --repo zacharypardey/conviction-status
+# First alert at 40 minutes stale, then every 2 hours while it stays stale. Run it by hand with test = true to get one test alert.
+name: dead-mans-switch
+on:
+  schedule:
+    - cron: '*/10 * * * *'   # GitHub may start scheduled runs late under load; the 40-minute threshold allows for that
+  workflow_dispatch:
+    inputs:
+      test:
+        description: 'Send one test alert now, whatever the status age'
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 50   # the last publish, even when newer commits (like this file's) did not touch status.enc.json
+      - name: Alert if the Mac stopped publishing
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          TEST: ${{ inputs.test }}
+        run: |
+          last=$(git log -1 --format=%ct -- status.enc.json)
+          if [ -z "$last" ]; then last=0; fi   # no publish in the last 50 commits: treat as stale
+          age=$(( ($(date +%s) - last) / 60 ))
+          echo "status.enc.json last published ${age} min ago"
+          send() {
+            if [ -z "$NTFY_TOPIC" ]; then echo "::error::NTFY_TOPIC is not set: no alert can be sent"; exit 1; fi
+            curl -fsS -H "Title: $1" -H "Priority: $2" -H "Tags: $3" -d "$4" "https://ntfy.sh/${NTFY_TOPIC}" > /dev/null
+          }
+          if [ "$TEST" = "true" ]; then
+            send "Conviction alarm: test" "default" "white_check_mark" "The off-laptop alarm works. The Mac last published ${age} minutes ago."
+          elif [ "$age" -ge 40 ] && [ $(( (age - 40) % 120 )) -lt 10 ]; then
+            send "Conviction: no status for ${age} min" "high" "warning" "The Mac has not published for ${age} minutes: asleep, offline, or the publisher stopped. Every bot on it (paper, sandbox, live) is paused or unwatched. Open the lid or check it."
+          fi
