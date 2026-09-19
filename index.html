@@ -61,6 +61,7 @@ main{padding:14px 12px 44px}h1{font-size:31px}h2{font-size:20px;margin-top:20px}
 .tc{margin-top:24px}.tc-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}.tc-legwrap{overflow-x:auto;margin:8px 0 4px}.tc-legend{display:grid;grid-template-columns:16px max-content max-content max-content;column-gap:14px;row-gap:5px;align-items:center;font-size:13.5px;width:max-content}.tc-legend .nm{font-weight:600}.tc-legend .v{font-family:"JetBrains Mono",monospace;font-variant-numeric:tabular-nums;font-size:12.5px;font-weight:600;text-align:right;padding-left:8px}.tc-legend .at{font-family:"Source Sans 3",sans-serif;font-weight:400;font-size:12px;opacity:.7}.fx{white-space:nowrap}.fx i,.tc-read i,.tc-legend i,.tc-intro i{font-style:italic;font-family:"Source Sans 3",Georgia,serif}.rad{border-top:1.2px solid currentColor;padding:0 1px;margin-left:1px}.tk{display:inline-block;vertical-align:middle;justify-self:center}.tk-dot{width:8px;height:8px;border-radius:50%;background:currentColor}.tk-line{width:16px;height:0;border-top:2px solid currentColor;border-radius:2px}.tk-gate{width:16px;height:7px;border-radius:4px;background:linear-gradient(currentColor,currentColor) center/100% 1.5px no-repeat,color-mix(in srgb,currentColor 30%,transparent)}.tk-band{width:16px;height:10px;border-radius:2px;background:var(--muted);opacity:.22}.s-ink{color:var(--ink)}.s-good{color:var(--good)}.s-muted{color:var(--muted)}.lg-row{display:contents}@media (max-width:560px){.tc-legend{display:block;width:auto}.lg-row{display:grid;grid-template-columns:16px 1fr auto;column-gap:10px;row-gap:1px;align-items:center;margin-bottom:8px}.lg-row .tk{grid-area:1/1}.lg-row .nm{grid-area:1/2}.lg-row .v{grid-area:1/3}.lg-row .fx{grid-area:2/2/3/4;white-space:normal;font-size:12.5px}}.tc-read{font-size:13px;color:var(--muted);margin:2px 0 0;max-width:880px;line-height:1.5}.tc-read b{font-weight:600}#tip .tip-h{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;opacity:.72;margin-bottom:4px}#tip .tip-row{display:grid;grid-template-columns:16px auto auto;column-gap:8px;align-items:center;line-height:1.6}#tip .tip-row b{font-family:"JetBrains Mono",monospace;font-variant-numeric:tabular-nums;font-weight:600;text-align:right;min-width:40px}#tip .s-ink{color:var(--surface)}#tip .s-good{color:var(--good-inv)}.tdot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:7px;vertical-align:-1.5px}.tdot.t-dr{background:var(--t-dr)}.tdot.t-r{background:var(--t-r)}.tdot.t-g{background:var(--t-g)}.tdot.t-dg{background:radial-gradient(circle,#fff 0 30%,var(--t-dg) 36%)}.tdot.t-na{box-shadow:inset 0 0 0 1.5px var(--muted);opacity:.6}.tkey{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center;margin:8px 0 0}.tkey>span{white-space:nowrap}.tkey>.tk-note{white-space:normal}   /* the delta-t dots: four steps checked as a set (every pair stays apart under red-green colour blindness, 3:1 against the table) - dark red t below 0, red behind the gate path, green on or ahead of it, dark green more than 1 ahead */th[data-sort]{cursor:pointer;user-select:none;-webkit-user-select:none}th[data-sort]:hover{color:var(--ink)}th[data-sort]:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}.sarr{font-size:9px;margin-left:4px;vertical-align:1px}.psort-m{display:none;align-items:center;flex-wrap:wrap;gap:8px;margin:6px 0 2px;font-size:13px;color:var(--muted)}.psort-m select,.psort-m button{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:5px 8px}.psort-m button{cursor:pointer}@media (max-width:1100px){.psort-m{display:flex}}@media (max-width:760px){.psort-m select,.psort-m button{font-size:16px}}.toc{border:1px solid var(--line);background:var(--tile);border-radius:4px;padding:12px 16px 10px;margin:22px 0 6px}.toc-h{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}.toc ul{list-style:none;margin:0;padding:0}.toc ul ul{padding-left:18px;margin:2px 0 4px}.toc li{margin:4px 0;font-size:15px;line-height:1.35}.toc ul ul li{font-size:14px}.toc a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}.toc a:hover,.toc a:focus-visible{border-bottom-color:currentColor}
 .toc-up{float:right;margin:6px 0 0 12px;font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:400;letter-spacing:.02em;color:var(--muted);text-decoration:none;border:1px solid var(--line);border-radius:3px;padding:2px 7px;line-height:1.4;white-space:nowrap}.toc-up:hover,.toc-up:focus-visible{color:var(--ink);border-color:var(--ink)}
 .ex [id^="ex-"]{scroll-margin-top:76px}   /* the contents and every section land below the sticky tab bar */
+.watch{list-style:none;margin:14px 0 18px;padding:0}.watch li{margin:0 0 10px;padding:10px 12px;border:1px solid var(--line);border-left:3px solid #B7791F;background:var(--surface);font-size:15px;line-height:1.55}.watch li.w-concern{border-left-color:var(--bad)}.pill.warn{background:#B7791F;color:#fff}
 </style></head><body><main>
 <nav id="nav" hidden></nav>
 <div id="gate"><div class="eyebrow">Bitcoin · Kalshi 15-minute windows</div><h1>Conviction</h1><p class="small">One-sided quotes where the model disagrees with the market. Bitcoin, paper. This page is public but its data is encrypted. Enter the passphrase to decrypt it in your browser; nothing is sent anywhere.</p>
@@ -137,13 +138,13 @@ function plain(r){r=String(r||'');let m;
 if(r==='ok')return ['quoting','ok'];if(r==='stopped')return ['STOPPED · kill switch engaged','bad'];if(r==='window not active')return ['window not open yet',''];
 if((m=r.match(/^bid only \(([^)]*)\)/)))return ['resting on the BUY side only · our fair is '+m[1].replace('+','')+' above the market','ok'];
 if((m=r.match(/^ask only \(([^)]*)\)/)))return ['resting on the SELL side only · our fair is '+m[1].replace('-','')+' below the market','ok'];
-if((m=r.match(/^no disagreement \(([^)]*)\)/)))return ['standing aside · model within 2¢ of the market ('+m[1]+')',''];
+if((m=r.match(/^no disagreement \(([^)]*)\)/)))return ['standing aside · not enough disagreement with the market ('+m[1]+')',''];
 if(/^jump/.test(r))return ['paused · sudden price jump, quotes resume about 30 s after it calms','warn'];
 if(/warming up/.test(r))return ['warming up · needs five minutes of price data after a restart','warn'];
 if(/^no reference/.test(r))return ['waiting for Kalshi to publish the reference price','warn'];
 if(/^composite stale/.test(r))return ['waiting for fresh exchange prices','warn'];
-if(/^wind-down/.test(r))return ['last 90 seconds · no new quotes, positions ride to settlement',''];
-if(/^open wait/.test(r))return ['first minute of the window · no quotes yet',''];
+if(/^wind-down/.test(r))return ['winding down · no new quotes, positions ride to settlement',''];
+if((m=r.match(/^open wait \((\d+)s in\)/)))return ['early in the window · not quoting yet ('+m[1]+' s in)',''];if(/^open wait/.test(r))return ['early in the window · not quoting yet',''];
 if(/sweep/.test(r))return ['one side pulled · a large sweep just hit it','warn'];
 if(/^markout pause/.test(r))return ['paused · recent fills were picked off ('+r.replace('markout pause ','')+')','warn'];
 if(/daily loss limit/.test(r))return ['halted for the day · loss limit hit','bad'];
@@ -182,14 +183,46 @@ function setTab(t){if(t===TAB)return;saveScroll();TAB=t;try{localStorage.setItem
 document.addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(b){e.preventDefault();setTab(b.dataset.tab);}});
 const ENV_NAMES={paper:'Paper · simulation',demo:'Demo · Kalshi sandbox',live:'Live · real money'};
 const NAV_NAMES={paper:'Paper',demo:'Demo',live:'Live'};
+const escH=v=>v==null?'':String(v).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);   /* text from files goes into the page as text, never as markup */
+function watchHtml(P){if(!P)return '';const TU='<a class="toc-up" href="#ex-toc" title="Back to the contents">&#8593; contents</a>';
+const E=[['Paper',P.crypto_home],['Sandbox',P.demo&&P.demo.crypto_home],['Live',P.live&&P.live.crypto_home]].filter(e=>e[1]&&!e[1].error);
+const items=[];const add=(lvl,title,body)=>items.push(`<li class="w-${lvl}"><span class="pill ${lvl==='concern'?'bad':'warn'}">${lvl}</span> <b>${title}</b> ${body}</li>`);
+const H=P.crypto_home;
+if(H&&!H.error){const pl=H.pool||{};const st=(H.strategies||[]).filter(s=>s.pool);
+ add('watch','The pool headline is not money one account could have made.',`Paper shows ${sgx(pl.pnl)} (${spct(pl.ret)}) on ${exact(pl.start)}. Each strategy is simulated as if it traded alone, and many of them fill on the same trades, so the total counts those trades more than once. Judge the strategies by their own paired tests (Part 8), not by the pool.`);
+ const ts=st.filter(s=>s.t!=null).sort((a,b)=>b.t-a.t);const best=ts[0];
+ add('watch','No strategy has passed its test yet.',`The run is at ${n0(pl.windows)} of 200 windows${best?`, and the highest standalone t is ${escH(best.name)}'s ${tnum(best.t)}`:''}. The test that counts is each strategy's paired t against the strategy it changes (Part 4's table), fixed before its data: it passes at t ≥ 2 by 200 windows and is dropped at t ≤ −1 after 100.`);
+ const mk=st.filter(s=>s.markout_10!=null);const neg=mk.filter(s=>s.markout_10<0);const res=mk.map(s=>s.markout_res).filter(v=>v!=null);
+ if(neg.length&&res.length){const lo=Math.min(...neg.map(s=>s.markout_10)),hi=Math.max(...neg.map(s=>s.markout_10)),rlo=Math.min(...res),rhi=Math.max(...res);
+  add(rlo<0?'concern':'watch','Right after our fills, the price tends to move against us.',`${neg.length} of ${mk.length} paper strategies have a negative 10-second markout (${ct(hi)} to ${ct(lo)} a contract). That is the early warning described in Parts 6 and 10. ${rlo>=0?`It has not turned into losses: at settlement, every strategy's markout is positive (${ct(rlo)} to ${ct(rhi)} a contract).`:`At settlement some are negative too (${ct(rlo)} to ${ct(rhi)} a contract).`}`);}
+}
+const thr=E.map(e=>[e[0],(e[1].gates||[]).find(g=>g.key==='throttle')]).filter(x=>x[1]&&x[1].v!=null);
+if(thr.some(x=>!x[1].ok))add('concern','Kalshi is refusing some of our requests for going too fast.',`${thr.map(x=>`${x[0]} ${pct(x[1].v)}`).join(' · ')}, against a go-live limit of 1%. Every bot polls Kalshi from the same machine, the stopped live bot included. It has to be fixed before real money (Part 13).`);
+const HL=P.live&&P.live.crypto_home;
+if(HL&&!HL.error&&HL.pool&&HL.pool.windows){const L=HL.pool;const c=Object.values(HL.coins||{})[0]||{};const killed=!!(c.live&&c.live.killed);const s0=(HL.strategies||[])[0]||{};
+ add(L.pnl<0?'concern':'watch','Real money so far.',`The live account traded in ${n0(L.traded_windows)} windows${killed?' before it was stopped':''}: ${sgx(L.pnl)} (${spct(L.ret)}), ${ct(s0.cents_per_contract)} a contract. Far too few windows to mean much, but it is the only real test so far.`);}
+const HD=P.demo&&P.demo.crypto_home;
+if(HD&&!HD.error){const c=Object.values(HD.coins||{})[0]||{};const lv=c.live||{};const cr=lv.cross_rejects||0,att=(lv.orders||0)+(lv.errors||0),oth=Math.max(0,(lv.errors||0)-cr);
+ if(att&&cr/att>0.05)add('concern',`${pct(cr/att)} of the sandbox's order attempts are refused.`,`${n0(cr)} of its ${n0(att)} order attempts since its last restart were refused because they would have crossed the sandbox's book, which a resting order must not do. The usual cause is pricing on a different book from the one we rest on: check the sandbox's venue line (bug log #30; the sandbox was moved onto its own book on 19 September). Separately, ${n0(oth)} attempts failed for other reasons, mostly the sandbox answering "service unavailable".`);
+ else if(lv.errors)add('watch','The sandbox\'s order path is noisy.',`${n0(lv.errors)} order errors since its last restart, mostly Kalshi's sandbox answering "service unavailable". Our handling is right: an order whose outcome is unknown is never sent twice. It does limit what the sandbox can prove.`);}
+const gen=P.generated?et(P.generated):'';
+return `<h2 id="ex-part-12">Part 12 · Things to watch${TU}</h2>
+<p>This part is not typed in. The page builds it from the same live data as the rest of the dashboard${gen?`, as of ${gen}`:''}. A <span class="pill bad">concern</span> needs action before real money; a <span class="pill warn">watch</span> needs attention but no action yet.</p>
+<ul class="watch">${items.join('')}</ul>
+<p class="aside"><b>From the 19 September studies (dated, not live).</b> Middle's edge depends on the period. Replayed with today's code over every recorded window, it made about \$0 a window from 11 to 15 September and +\$13 a window from 15 to 19 September. Its current paper run sits at the good end of that range. None of eleven single changes to middle beat it on the later half of the history.</p>`;}
+function todoHtml(P){const T=P&&P.todo;if(!T||!T.rows||!T.rows.length)return '';const TU='<a class="toc-up" href="#ex-toc" title="Back to the contents">&#8593; contents</a>';const g=(r,k)=>escH(r[k]);
+return `<h2 id="ex-part-13">Part 13 · The to-do list${TU}</h2>
+<p>The ranked list we work from, ranked by payoff for the effort. It is read from <code>${escH(T.file)}</code> in the repository every time this page updates, so it always matches that file (last changed ${escH((T.updated||'').replace('T',' '))} ET). Each item's full write-up is in the file.</p>
+<div class="wrap"><table class="stack"><tr><th>to-do</th><th>effort</th><th>payoff</th><th>status</th></tr>${T.rows.map(r=>`<tr><td class="rh">${g(r,'#')}. ${g(r,'to-do')}</td><td data-label="effort">${g(r,'effort')}</td><td data-label="payoff">${g(r,'payoff')}</td><td data-label="status">${g(r,'status')}</td></tr>`).join('')}</table></div>`;}
+let EXP_P=null;   /* the payload the writeup's live parts (12 and 13) are built from */
 function explainerHtml(){return `
 <div class="ex">
 <h1 class="exh">How this thing actually works</h1>
-<p class="lede">A complete tour of a robot that bets on Bitcoin every fifteen minutes. No jargon, no hand-waving. Read the whole thing and you will understand every number on this dashboard, including the ones that should worry you.</p>
+<p class="lede">A complete tour of Conviction: a set of trading strategies that bet on Kalshi's fifteen-minute Bitcoin contracts, tested side by side on paper before any of them touches real money. No jargon, no hand-waving. Read it and you will understand every number on this dashboard. The ones that should worry you right now are in Part 12, built from the same live data as the rest of the page.</p>
 
 <h2>The one-sentence version</h2>
 <p>Kalshi runs a market on the question <b>"will Bitcoin be higher fifteen minutes from now?"</b> We built a machine that forms its own opinion about that question, and whenever its opinion differs enough from the crowd's, it quietly takes the other side.</p>
-<p class="aside">That is genuinely the whole idea. Everything below is detail about three phrases: <b>its own opinion</b>, <b>differs enough</b>, and <b>quietly</b>.</p>
+<p class="aside">That is genuinely the whole idea. Everything below is detail about three phrases: <b>its own opinion</b>, <b>differs enough</b>, and <b>quietly</b>. Whether that opinion is good enough to make money is still open: Part 3 shows where it has not held up, and Part 8 how we will know.</p>
 
 <nav class="toc" id="ex-toc" aria-label="Contents"><div class="toc-h">Contents</div><ul>
 <li><a href="#ex-part-1">Part 1 · The game</a><ul><li><a href="#ex-coupon">A contract is a coupon that pays one dollar</a></li></ul></li>
@@ -203,32 +236,34 @@ function explainerHtml(){return `
 <li><a href="#ex-part-9">Part 9 · The three worlds</a></li>
 <li><a href="#ex-part-10">Part 10 · What we honestly do not know yet</a></li>
 <li><a href="#ex-part-11">Part 11 · How much could middle make at scale?</a></li>
+<li><a href="#ex-part-12">Part 12 · Things to watch</a></li>
+<li><a href="#ex-part-13">Part 13 · The to-do list</a></li>
 <li><a href="#ex-cheat">A cheat sheet for the rest of this dashboard</a></li>
 </ul></nav>
 
 <h2 id="ex-part-1">Part 1 · The game<a class="toc-up" href="#ex-toc" title="Back to the contents">&#8593; contents</a></h2>
-<p>Every fifteen minutes, Kalshi opens a new market. At the top of the window it takes the average Bitcoin price over the first sixty seconds and writes that number down. Call it <b>K</b>, the strike. Fifteen minutes later it takes another sixty-second average and compares the two.</p>
+<p>Every fifteen minutes, Kalshi opens a new market. The price it uses is its own Bitcoin index: the <b>CF Benchmarks Real-Time Index (BRTI)</b>, built every second from the order books of several large exchanges. As a window opens, Kalshi averages BRTI over the sixty seconds just before and writes that number down. Call it <b>K</b>, the strike. At the close it averages BRTI over the window's last sixty seconds and compares the two.</p>
 <p>If the ending average is above K, the market settles <b>YES</b>. If not, <b>NO</b>. Then it does the whole thing again. Ninety-six times a day, forever.</p>
 <svg class="dg" viewBox="0 0 400 158" role="img" aria-label="Timeline of one fifteen-minute window">
-<rect x="30" y="62" width="40" height="26" fill="var(--tile)" stroke="var(--line)"/>
-<rect x="330" y="62" width="40" height="26" fill="var(--tile)" stroke="var(--line)"/>
-<line x1="30" y1="75" x2="370" y2="75" stroke="var(--ink)" stroke-width="1.5"/>
-<line x1="30" y1="58" x2="30" y2="92" stroke="var(--ink)" stroke-width="2"/>
+<rect x="16" y="62" width="44" height="26" fill="var(--tile)" stroke="var(--line)" stroke-dasharray="3 2"/>
+<rect x="326" y="62" width="44" height="26" fill="var(--tile)" stroke="var(--line)"/>
+<line x1="16" y1="75" x2="370" y2="75" stroke="var(--ink)" stroke-width="1.5"/>
+<line x1="60" y1="58" x2="60" y2="92" stroke="var(--ink)" stroke-width="2"/>
 <line x1="370" y1="58" x2="370" y2="92" stroke="var(--ink)" stroke-width="2"/>
-<text x="30" y="50" font-size="11" fill="var(--muted)" text-anchor="middle">open</text>
+<text x="60" y="50" font-size="11" fill="var(--muted)" text-anchor="middle">open</text>
 <text x="370" y="50" font-size="11" fill="var(--muted)" text-anchor="middle">close</text>
-<text x="50" y="79" font-size="9" fill="var(--ink)" text-anchor="middle">60 s</text>
-<text x="350" y="79" font-size="9" fill="var(--ink)" text-anchor="middle">60 s</text>
-<text x="50" y="107" font-size="11" fill="var(--accent)" text-anchor="middle" font-weight="700">K</text>
-<text x="50" y="120" font-size="9.5" fill="var(--muted)" text-anchor="middle">the strike</text>
-<text x="350" y="107" font-size="11" fill="var(--ink)" text-anchor="middle" font-weight="700">A</text>
-<text x="350" y="120" font-size="9.5" fill="var(--muted)" text-anchor="middle">the answer</text>
-<text x="200" y="30" font-size="12" fill="var(--ink)" text-anchor="middle">fifteen minutes of trading</text>
-<line x1="90" y1="38" x2="310" y2="38" stroke="var(--muted)" stroke-width="1" marker-start="url(#exa)" marker-end="url(#exa)"/>
+<text x="38" y="79" font-size="9" fill="var(--ink)" text-anchor="middle">60 s</text>
+<text x="348" y="79" font-size="9" fill="var(--ink)" text-anchor="middle">60 s</text>
+<text x="38" y="107" font-size="11" fill="var(--accent)" text-anchor="middle" font-weight="700">K</text>
+<text x="38" y="120" font-size="9.5" fill="var(--muted)" text-anchor="middle">the strike</text>
+<text x="348" y="107" font-size="11" fill="var(--ink)" text-anchor="middle" font-weight="700">A</text>
+<text x="348" y="120" font-size="9.5" fill="var(--muted)" text-anchor="middle">the answer</text>
+<text x="215" y="30" font-size="12" fill="var(--ink)" text-anchor="middle">fifteen minutes of trading</text>
+<line x1="68" y1="38" x2="362" y2="38" stroke="var(--muted)" stroke-width="1" marker-start="url(#exa)" marker-end="url(#exa)"/>
 <text x="200" y="140" font-size="10.5" fill="var(--muted)" text-anchor="middle">settles YES (pays \$1) if A is above K, otherwise NO (pays \$0)</text>
 <defs><marker id="exa" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0 1 L5 3.5 L0 6" fill="none" stroke="var(--muted)"/></marker></defs>
 </svg>
-<p class="cap">One window. The strike is decided by the first minute, the answer by the last minute, and in between anyone can trade.</p>
+<p class="cap">One window. The strike is BRTI's average over the minute before it opens, the answer its average over the last minute, and for the fifteen minutes in between anyone can trade.</p>
 
 <h2 id="ex-coupon">A contract is a coupon that pays one dollar<a class="toc-up" href="#ex-toc" title="Back to the contents">&#8593; contents</a></h2>
 <p>Here is the part that trips everyone up, and it is the key to the whole thing. When you buy a YES contract, you are buying a coupon that pays exactly <b>\$1</b> if the answer turns out to be yes, and exactly <b>\$0</b> if it does not.</p>
@@ -246,11 +281,11 @@ function explainerHtml(){return `
 <text x="370" y="86" font-size="9.5" fill="var(--muted)" text-anchor="end">certain</text>
 <text x="200" y="106" font-size="11" fill="var(--ink)" text-anchor="middle">price in cents = the crowd's probability in percent</text>
 </svg>
-<p>This is why the job is a <i>forecasting</i> job and not a gambling job. If we can say "that should be 66¢, not 62¢" and be right more often than we are wrong, there is money in the gap. The entire machine exists to produce that one number.</p>
+<p>This is why the job is a <i>forecasting</i> job and not a gambling job. If we can say "that should be 66¢, not 62¢", and our numbers are closer to the truth than the market's on average, there is money in the gap. The whole model exists to produce that one number.</p>
 
 <h2 id="ex-part-2">Part 2 · Two ways to play a market<a class="toc-up" href="#ex-toc" title="Back to the contents">&#8593; contents</a></h2>
 <p>You can play a market as a <b>gambler</b>: you want the price to move your way, so you buy and wait. Or you can play it as a <b>shop</b>: you stand there all day offering to buy at one price and sell at a slightly higher one, and you make your living on the difference.</p>
-<p>The shop is called a <b>market maker</b>, and that is mostly what we are. We post an offer to buy a bit below what we think it is worth and an offer to sell a bit above. If someone hits either one, we pocket the gap.</p>
+<p>The shop is called a <b>market maker</b>, and that is mostly what we are. The classic version posts an offer to buy a bit below what it thinks the contract is worth and an offer to sell a bit above. If someone hits either one, it pockets the gap. Part 4 explains why most of our strategies post only one of the two.</p>
 <svg class="dg" viewBox="0 0 400 214" role="img" aria-label="An order book with our quotes on both sides">
 <text x="110" y="20" font-size="11" fill="var(--muted)" text-anchor="middle">people willing to BUY</text>
 <text x="290" y="20" font-size="11" fill="var(--muted)" text-anchor="middle">people willing to SELL</text>
@@ -267,7 +302,7 @@ function explainerHtml(){return `
 <text x="200" y="181" font-size="11" fill="var(--ink)" text-anchor="middle">buys from us at 66¢, we keep 3¢ and hold nothing</text>
 <text x="200" y="202" font-size="10.5" fill="var(--muted)" text-anchor="middle">that is the whole business, repeated a few hundred times a day</text>
 </svg>
-<p class="aside"><b>Why the exchange likes us.</b> On Kalshi, whoever posts an order and waits is a <b>maker</b> and pays no fee at all. Whoever crosses the spread to trade immediately pays. We are almost always the one waiting, which is why our fee line usually reads zero.</p>
+<p class="aside"><b>Why waiting is cheap.</b> On this series, whoever posts an order and waits is a <b>maker</b> and pays no fee at all. Whoever crosses the spread to trade immediately pays (Part 5). Every strategy but one waits, which is why our fee line usually reads zero.</p>
 `+explainerHtml2();}
 
 function explainerHtml2(){return `
@@ -275,7 +310,8 @@ function explainerHtml2(){return `
 <p>To disagree with the market you need a number of your own. Ours is built in three steps.</p>
 
 <h3>Step one: a cleaner price than anyone else's</h3>
-<p>We do not trust any single exchange. We read Bitcoin's price from <b>five</b> of them at once, several times a second, and take the middle value. One exchange freezing, lagging, or printing a bad tick cannot move our number. That middle value is what we call the <b>composite</b>.</p>
+<p>We do not trust any single exchange. We read Bitcoin's price from <b>five</b> of them at once, several times a second, and take the middle value. One exchange freezing, lagging, or printing a bad tick cannot move our number. That middle value is what we call the <b>composite</b>. The five are the exchanges inside BRTI that publish a feed we can read, so the composite is our own copy of Kalshi's index.</p>
+<p>Since 17 and 18 September most strategies no longer need the copy: they read BRTI itself, streamed live from Kalshi. Only <b>model</b> still prices on the composite, as the control that tells us whether reading BRTI directly helps.</p>
 
 <h3>Step two: how far can it move?</h3>
 <p>Over fifteen minutes Bitcoin wanders more or less at random. You cannot predict the direction, but you absolutely can measure how <i>far</i> it usually wanders, and that turns out to be the whole ballgame.</p>
@@ -307,33 +343,33 @@ function explainerHtml2(){return `
 <div class="eq"><div class="fml"><i>p</i> = &#934;(<i>z</i>)</div><div class="fml"><i>z</i> = <span class="frac"><span><i>S</i> + <i>b</i> &#8722; <i>K</i></span><span><i>&#963;</i>&#8202;<i>S</i> &#8730;<span class="rad"><i>&#964;</i></span></span></span></div>
 <ul class="legend">
 <li><b>p</b> our probability that the answer is YES, which is also the price we think is fair</li>
-<li><b>S</b> Bitcoin's price right now, from our five-exchange composite</li>
-<li><b>b</b> the basis, explained immediately below</li>
+<li><b>S</b> Bitcoin's price right now: BRTI itself for most strategies, our five-exchange composite for model</li>
+<li><b>b</b> the basis, explained immediately below (zero for strategies that read BRTI itself)</li>
 <li><b>K</b> the strike this window is measured against</li>
-<li><b>Φ</b> "how much of the bell curve is to the left of here", a lookup, nothing more</li>
+<li><b>Φ</b> "how much of the bell curve is to the left of here", a lookup. In practice a fat-tailed curve, corrected by a calibration dial (both explained after the aside on units)</li>
 </ul></div>
 <p>Read the fraction on top as <i>how far above the strike we already are</i>, and the one underneath as <i>how far the price could still move</i>. Divide the head start by the uncertainty and you have the whole story. A big head start with little time left is nearly certain. The same head start with the full fifteen minutes to go is barely better than a coin flip.</p>
 
 <h3>The basis, or: the small detail that cost us money</h3>
-<p>Kalshi does not settle against our five-exchange composite. It settles against its own index, and that index runs consistently a few dollars above our number. Not randomly above. <i>Consistently</i> above.</p>
+<p>Kalshi does not settle against our composite. It settles against BRTI, and the two differ by a steady amount rather than a random one. In our first days the gap was about five dollars. Since we pinned each exchange's offset on 13 September it has usually been under a dollar.</p>
 <svg class="dg" viewBox="0 0 400 132" role="img" aria-label="Kalshi's settlement index sits about five dollars above our composite">
 <line x1="40" y1="44" x2="360" y2="44" stroke="var(--accent)" stroke-width="2"/>
 <line x1="40" y1="84" x2="360" y2="84" stroke="var(--ink)" stroke-width="2" stroke-dasharray="5 3"/>
 <text x="40" y="34" font-size="11" fill="var(--accent)">Kalshi settlement index</text>
 <text x="40" y="102" font-size="11" fill="var(--ink)">our composite of five exchanges</text>
 <line x1="330" y1="44" x2="330" y2="84" stroke="var(--muted)" stroke-width="1"/>
-<text x="322" y="68" font-size="11" fill="var(--muted)" text-anchor="end" font-weight="700">b ≈ \$5</text>
-<text x="200" y="124" font-size="10.5" fill="var(--muted)" text-anchor="middle">ignore this gap and every YES contract looks cheaper than it is</text>
+<text x="322" y="68" font-size="11" fill="var(--muted)" text-anchor="end" font-weight="700">b, the gap</text>
+<text x="200" y="124" font-size="10.5" fill="var(--muted)" text-anchor="middle">ignore the gap and every price we compute is off by it</text>
 </svg>
-<p>Five dollars sounds like nothing against a \$77,000 price. It is not nothing. Near the money, that gap is worth <b>two to five cents</b> of probability, and we are hunting for edges of exactly that size. A bot that forgets the basis will cheerfully sell YES all day at prices that are actually fair, and slowly bleed.</p>
+<p>Five dollars sounded like nothing against a \$77,000 price. It was not nothing. Near the money, that gap was worth <b>two to five cents</b> of probability, and we are hunting for edges of exactly that size. A bot that forgets the basis will cheerfully sell YES all day at prices that are actually fair, and slowly bleed.</p>
 <p>So we learn it. Every time a window opens we compare Kalshi's published strike with our own sixty-second average, and the difference is one observation of the basis. We keep a running average of the last several windows.</p>
-<p>Since 17 and 18 September most strategies skip this step. They read Kalshi's settlement index directly, streamed from Kalshi, so there is no basis to learn. Only model still prices on the composite, as the control.</p>
-<p class="aside"><b>This bit us for real.</b> On 12 September a freshly started bot had no basis yet, so it used zero. It sold YES at 49¢ while a correctly warmed copy of the same code, reading the same prices in the same second, said 67¢. The window settled YES. That is a real loss caused purely by a cold start, and it is why a bot now refuses to quote at all until it has seen at least two window openings.</p>
+<p>Strategies that read BRTI itself have no basis to learn; only model still learns it.</p>
+<p class="aside"><b>This bit us for real.</b> On 12 September a freshly started bot had no basis yet, so it used zero. It sold YES at 49¢ while a correctly warmed copy of the same code, reading the same prices in the same second, said 67¢. The window settled YES. That is a real loss caused purely by a cold start, and it is why a bot now refuses to quote at all until it has seen at least two window openings. After a restart it replays its own recordings first, so those two openings are already there.</p>
 `+explainerHtml3();}
 
 function explainerHtml3(){return `
 <h2 id="ex-units">An aside on units, or why there is a whole Bitcoin price in the denominator<a class="toc-up" href="#ex-toc" title="Back to the contents">&#8593; contents</a></h2>
-<p>Someone reading that formula carefully will object, and the objection is a good one. The top of the fraction is a <i>distance</i>: how many dollars we are above the strike, usually a handful. The bottom appears to contain the entire price of Bitcoin, about &#36;77,000. You cannot add those two things together. So why is it fine to multiply by them?</p>
+<p>Someone reading that formula carefully will object, and the objection is a good one. The top of the fraction is a <i>distance</i>: how many dollars we are above the strike, usually a handful. The bottom appears to contain the entire price of Bitcoin, about &#36;80,000. You cannot add those two things together. So why is it fine to multiply by them?</p>
 <p>The answer is that <b>&#963; is not an amount of money. It is a percentage.</b></p>
 <p>Look at how we measure it. We take the <i>logarithm</i> of the price before we measure anything, which means what we actually record is proportional moves, not dollar moves. To &#963;, a jump from &#36;76,700 to &#36;76,730 and a jump from &#36;10,000 to &#36;10,004 are the same size, because both are about four hundredths of one percent. There are no dollars anywhere inside &#963;. Its only unit is <b>per square root of a second</b>, and that comes from the square-root-of-time rule, not from money.</p>
 <p>So &#963;&#8730;&#964; is a bare fraction. A percentage of nothing is nothing, and <b>S is what turns that percentage into money.</b> It is a multiplier, not an addend. Once you multiply, the bottom of the fraction is in dollars, the top is in dollars, and they cancel.</p>
@@ -367,7 +403,7 @@ function explainerHtml3(){return `
 <h3>Every symbol on this page, and what it is measured in</h3>
 <p>Every equation here passes the same test: both sides of the equals sign carry the same units. A formula that fails that test is wrong no matter how convincing its output looks.</p>
 <div class="wrap"><table class="stack"><tr><th>symbol</th><th>units</th><th>what it is</th></tr>
-<tr><td class="rh">S</td><td data-label="units">dollars</td><td data-label="what it is">Bitcoin's price now, from the five-exchange composite</td></tr>
+<tr><td class="rh">S</td><td data-label="units">dollars</td><td data-label="what it is">Bitcoin's price now: BRTI itself for most strategies, the five-exchange composite for model</td></tr>
 <tr><td class="rh">K</td><td data-label="units">dollars</td><td data-label="what it is">the strike this window settles against</td></tr>
 <tr><td class="rh">b</td><td data-label="units">dollars</td><td data-label="what it is">the basis: Kalshi's index minus our composite</td></tr>
 <tr><td class="rh">&#964;</td><td data-label="units">seconds</td><td data-label="what it is">time left in the window</td></tr>
@@ -432,7 +468,7 @@ function explainerHtml3(){return `
 <p>Our quoting threshold is two cents. A trend has to be worth more than that before it changes a single decision we make, and even a doubling-every-year trend barely clears it &#8212; while taking a fortnight of solid trading just to establish that it was ever there. By then it is a different trend.</p>
 
 <h3>And we did not just assume it, we checked</h3>
-<p>On our own recorded windows:</p>
+<p>On our first 147 recorded windows (12 and 13 September). The later, much larger checks in the next aside and in Part 3 came to the same answer: over fifteen minutes, the direction is a coin flip.</p>
 <div class="wrap"><table class="stack"><tr><th>test</th><th>result</th><th>verdict</th></tr>
 <tr><td class="rh">how often YES won</td><td data-label="result">45.6% of 147 windows</td><td data-label="verdict">a coin flip</td></tr>
 <tr><td class="rh">direction repeating</td><td data-label="result">51.7%</td><td data-label="verdict">nothing</td></tr>
@@ -467,7 +503,7 @@ function explainerHtml3(){return `
 <text x="200" y="140" font-size="9.5" fill="var(--muted)" text-anchor="middle">same middle, heavier ends</text>
 </svg>
 <p class="cap">Same shape where most of the action is, much heavier ends. Using the dashed curve would make us confidently sell things that then happen.</p>
-<p><b>Three. Real jumps are not in the distribution at all, so we stop trading instead.</b> Some moves are not "a big draw from the distribution", they are a different thing entirely: a liquidation cascade, a headline, an exchange breaking. No width setting handles those; the honest response is to stand aside. A detector called <b>Lee-Mykland</b> runs continuously, comparing the newest one-second move with the typical size of the moves immediately around it. When one is far too large to belong, quoting is vetoed and stays vetoed while the flag decays away. You will see this on the dashboard as "jump guard".</p>
+<p><b>Three. Real jumps are not in the distribution at all, so we stop trading instead.</b> Some moves are not "a big draw from the distribution", they are a different thing entirely: a liquidation cascade, a headline, an exchange breaking. No width setting handles those; the honest response is to stand aside. A detector called <b>Lee-Mykland</b> runs continuously, comparing the newest one-second move with the typical size of the moves immediately around it. When one is far too large to belong, quoting is vetoed and stays vetoed while the flag decays away. You will see this on the dashboard as "paused · sudden price jump".</p>
 <p><b>Four. The bell curve itself gets marked for accuracy.</b> Even after all of the above, the shape can be systematically slightly wrong, and wrong in different ways depending on how much time is left. So the model keeps a correction per time band, fitted from how its past probabilities actually turned out, and applies it before quoting. A model that checks its own homework.</p>
 <p class="aside">So the only textbook assumption we actually lean on is <b>zero drift over fifteen minutes</b>. Constant volatility, thin tails, no jumps: we reject all three explicitly, with machinery for each.</p>
 
@@ -505,14 +541,14 @@ function explainerHtml3(){return `
 <text x="200" y="162" font-size="10.5" fill="var(--muted)" text-anchor="middle">most of the time the answer is "no opinion", and we sit still</text>
 <text x="200" y="176" font-size="10.5" fill="var(--muted)" text-anchor="middle">a market maker who is willing to do nothing is a rare thing</text>
 </svg>
-<p>This halves the number of trades and roughly doubles the quality of the ones that remain. Most of the time the dashboard will show a strategy saying <b>"standing aside"</b>. That is the strategy working, not the strategy sleeping.</p>
+<p>The rule rests on a measurement. In the 12 September fills study, fills where the model agreed with the market lost 3.5¢ a contract once the price had moved, and fills on the side of a real disagreement made 2.5¢. Most of the time the dashboard will show a strategy saying <b>"standing aside"</b>. That is the strategy working, not the strategy sleeping.</p>
 
 <h3>Rule two: when the gap is big, stop waiting</h3>
 <p>Posting an order and waiting is free, but it only works if someone comes to you. When the disagreement gets <i>large</i>, five to eight cents, waiting is the wrong instinct: an edge that big will usually be gone before anyone wanders over.</p>
 <p>So a separate strategy crosses the spread and takes the price immediately. It pays a fee to do it, so it only fires on gaps big enough to cover the fee several times over, and at most once per window in each of three time bands: early, middle and late. One strategy is patient, the other is opportunistic, and they are accounted for separately so we can see which one actually earns its keep. Since 13 September the taker has run as a shadow: it keeps its own paper account and its own t-stat, but risks none of the pool's money, because it lost 3.95¢ a contract over its first 101 fills.</p>
 
 <h3>Rule three, on trial: the flat strategy stops adding inventory in the last five minutes</h3>
-<p>The <b>flat</b> strategy is the index strategy with one line changed. Index is model's rules, priced on Kalshi's settlement index; see the table at the end of this part. Flat reads the same fair value, applies the same two-cent rule, posts on the same side at the same price and size, obeys the same caps and brakes, and runs on its own $5,000 of the same pool. For the first ten minutes of every window the two are indistinguishable. The one difference: <b>inside the last five minutes it will not add to its position.</b></p>
+<p>The <b>flat</b> strategy is the index strategy with one line changed. Index is model's rules priced on BRTI; see the table at the end of this part. Flat reads the same fair value, applies the same two-cent rule, posts on the same side at the same price and size, obeys the same caps and brakes, and runs on its own $5,000 of the same pool. For the first ten minutes of every window the two are indistinguishable. The one difference: <b>inside the last five minutes it will not add to its position.</b></p>
 <p>Precisely: with five minutes left (the dashboard calls this τ, the seconds to the close, and the rule starts at τ = 300) the size the strategy may post on each side becomes "whatever brings the position closer to zero, and nothing more". Holding 40 contracts long, it may still post a sell for up to 40, and a buy for zero. Holding nothing, it posts nothing at all and stands aside until the window settles. It does not chase a flat position - it never crosses the spread to get out - it simply stops taking on inventory that would have to be carried into settlement. The dashboard shows this as the reason <b>"late cap"</b> next to the flat strategy's quote.</p>
 <svg class="dg" viewBox="0 0 400 150" role="img" aria-label="A 15-minute window: the flat strategy quotes exactly like model for ten minutes, then may only reduce its position">
 <rect x="30" y="52" width="226.7" height="26" fill="var(--good)" opacity="0.18"/>
@@ -520,7 +556,7 @@ function explainerHtml3(){return `
 <line x1="30" y1="78" x2="370" y2="78" stroke="var(--ink)" stroke-width="1.5"/>
 <line x1="30" y1="74" x2="30" y2="86" stroke="var(--ink)" stroke-width="1.5"/><line x1="143.3" y1="74" x2="143.3" y2="86" stroke="var(--ink)" stroke-width="1"/><line x1="256.7" y1="74" x2="256.7" y2="86" stroke="var(--ink)" stroke-width="2"/><line x1="370" y1="74" x2="370" y2="86" stroke="var(--ink)" stroke-width="1.5"/>
 <text x="30" y="98" font-size="9.5" fill="var(--muted)" text-anchor="start">open</text><text x="143.3" y="98" font-size="9.5" fill="var(--muted)" text-anchor="middle">5 min</text><text x="256.7" y="98" font-size="9.5" fill="var(--muted)" text-anchor="middle">10 min · τ = 300 s</text><text x="370" y="98" font-size="9.5" fill="var(--muted)" text-anchor="end">close</text>
-<text x="143.3" y="44" font-size="11" fill="var(--good)" text-anchor="middle" font-weight="700">same as model</text>
+<text x="143.3" y="44" font-size="11" fill="var(--good)" text-anchor="middle" font-weight="700">same as index</text>
 <text x="143.3" y="69" font-size="9.5" fill="var(--ink)" text-anchor="middle">quotes the side it believes in, adds inventory</text>
 <text x="313.3" y="44" font-size="11" fill="var(--bad)" text-anchor="middle" font-weight="700">reduce only</text>
 <text x="313.3" y="69" font-size="9.5" fill="var(--ink)" text-anchor="middle">sells if long, buys if short</text>
@@ -528,15 +564,15 @@ function explainerHtml3(){return `
 <text x="200" y="138" font-size="10.5" fill="var(--muted)" text-anchor="middle">it never crosses the spread to get flat: it stops adding, it does not chase</text>
 </svg>
 <p><b>Why this one change.</b> On 16 September we split every window's result for the model strategy into two pieces: what the spread earned on fills that were closed out inside the window, and what the inventory still held at the close made or lost when the window settled. Over 274 windows the first piece was <b>+$3,807</b> (t = +4.42) and the second was <b>−$2,795</b> (t = −2.04). The bot was being paid for quoting and charged for holding. Inventory taken late is the most expensive kind: with a minute or two left the outcome is nearly decided, whoever hits our quote can mostly see that already, and there is no time left to trade back out.</p>
-<p><b>Why a second strategy rather than just changing the model.</b> The two run side by side on the same windows, so "did the change help?" is answered by the <b>difference</b> in their results, window by window - and that difference is far less noisy than either strategy's total, because everything the two share (the price moves, every fill in the first ten minutes) cancels out. A strategy's own result swings about $100 a window; the difference between the two swings about $47. That is the paired t of Part 8, and it converges roughly five times faster than either strategy's absolute edge would. Flat replaced the earlier "wide" strategy, whose results turned out to be 0.89-correlated with model's: a duplicate that could never have told us anything new.</p>
+<p><b>Why a separate strategy rather than just changing the base.</b> The two run side by side on the same windows, so "did the change help?" is answered by the <b>difference</b> in their results, window by window - and that difference is far less noisy than either strategy's total, because everything the two share (the price moves, every fill in the first ten minutes) cancels out. In the first flat-against-model run, a strategy's own result swung about $100 a window and the difference between the two about $47. That is the paired t of Part 8, and it converges roughly five times faster than either strategy's absolute edge would. Flat replaced the earlier "wide" strategy, whose results turned out to be 0.89-correlated with model's: a duplicate that could never have told us anything new.</p>
 <p>What to watch: flat's row in the performance table, and its paired t against index (Part 8). The rule was written before its data: it passes at t ≥ 2 by 200 windows and is dropped at t ≤ −1 after 100. Until then the two are one experiment, not a winner and a loser. If flat wins, the late cap becomes part of the base strategy. If it loses, we have learned, cheaply and on paper, that the settlement losses were the price of fills worth having.</p>
 <p class="aside">One wrinkle on a real exchange account: two strategies posting the same price on one account are a single spot in the exchange's queue, so on the demo they take turns being first in line and share the fills between them. In paper, since 18 September, each strategy is simulated as if it traded alone and takes every trade on its own. That keeps each strategy's result its own, but it means the pool's total counts some trades more than once. Read the pool as a sum of separate experiments, not as one account's money.</p>
 
 <h3 id="ex-roster">The strategies running now<a class="toc-up" href="#ex-toc" title="Back to the contents">&#8593; contents</a></h3>
-<p>Every strategy is a one-line change to another, so each is judged by its paired t against the strategy it changes (Part 8). The rule is written before any of its data: it passes at t ≥ 2 by 200 windows, and is dropped at t ≤ −1 after 100.</p>
+<p>Every strategy is a one-line change to another, so each is judged by its paired t against the strategy it changes (Part 8). The rule is written before any of its data: it passes at t ≥ 2 by 200 windows, and is dropped at t ≤ −1 after 100. All of them skip the first minute of every window, when the price is jumpiest.</p>
 <div class="wrap"><table class="stack"><tr><th>strategy</th><th>what it does</th><th>judged against</th></tr>
 <tr><td class="rh">model</td><td data-label="what it does">the original rules (Rule one), priced on our five-exchange composite. Kept as the control.</td><td data-label="judged against">none: the control</td></tr>
-<tr><td class="rh">index</td><td data-label="what it does">model's rules, priced on Kalshi's settlement index itself</td><td data-label="judged against">model</td></tr>
+<tr><td class="rh">index</td><td data-label="what it does">model's rules, priced on BRTI itself</td><td data-label="judged against">model</td></tr>
 <tr><td class="rh">flat</td><td data-label="what it does">index, but no new inventory in the last five minutes (Rule three)</td><td data-label="judged against">index</td></tr>
 <tr><td class="rh">middle</td><td data-label="what it does">index, but quotes only from 10 to 5 minutes before the close, then holds what it has to settlement</td><td data-label="judged against">index</td></tr>
 <tr><td class="rh">stop at 5</td><td data-label="what it does">index, but quotes nothing at all in the last five minutes</td><td data-label="judged against">index</td></tr>
@@ -567,7 +603,7 @@ function explainerHtml3(){return `
 <text x="370" y="146" font-size="10" fill="var(--muted)" text-anchor="middle">100¢</text>
 <text x="200" y="166" font-size="10.5" fill="var(--muted)" text-anchor="middle">taking costs most exactly where the market is least sure</text>
 </svg>
-<p>The shape is a warning label. The fee is largest at 50¢, which is where the outcome is most uncertain and where an edge is hardest to prove. It shrinks toward the ends, where the outcome is nearly decided. Anyone paying to take a coin-flip position is paying the most for the least reliable opinion. Our strategies only ever wait in the book, so they pay nothing at all.</p>
+<p>The shape is a warning label. The fee is largest at 50¢, which is where the outcome is most uncertain and where an edge is hardest to prove. It shrinks toward the ends, where the outcome is nearly decided. Anyone paying to take a coin-flip position is paying the most for the least reliable opinion. Every strategy except the taker only ever waits in the book, so they pay nothing at all.</p>
 
 <h2 id="ex-part-6">Part 6 · The brakes<a class="toc-up" href="#ex-toc" title="Back to the contents">&#8593; contents</a></h2>
 <p>A strategy that makes money on average can still destroy you on a bad afternoon. Four independent brakes sit between the model and the account, and each one can stop the machine without the others.</p>
@@ -587,7 +623,7 @@ function explainerHtml3(){return `
 <text x="200" y="224" font-size="10.5" fill="var(--muted)" text-anchor="middle">plus a pause if recent fills look picked off, described next</text>
 </svg>
 <p>There is a fifth, subtler brake. After every fill we check where the price went in the following ten seconds. If our fills are consistently followed by the market moving against us, it means the people trading with us know something we do not, and we widen our spread or stop for ten minutes. This measurement is called a <b>markout</b>, and it is the earliest honest warning that an edge has stopped being an edge.</p>
-<p class="aside"><b>In paper, the two daily-loss brakes are switched off</b> (since 16 September). A halt in paper protects no money and only throws away windows the statistics need. The brakes stay on in the sandbox and for real money.</p>
+<p class="aside"><b>The two daily-loss brakes are on only for real money</b> (half size at −5% of the pool for the day, stop at −10%). Paper and the sandbox switched them off on 16 September: a halt there protects no money and only throws away windows the statistics need. One gap we know about: after a restart, the markout brake starts from nothing and cannot act until 25 new fills arrive. The fix is on the to-do list (Part 13).</p>
 `+explainerHtml4();}
 
 function explainerHtml4(){return `
@@ -634,9 +670,7 @@ function explainerHtml4(){return `
 </svg>
 <div class="eq"><div class="fml"><i>t</i> = <span class="frac"><span><i>&#956;</i></span><span><i>s</i> / &#8730;<span class="rad"><i>n</i></span></span></span></div>
 <ul class="legend">
-<li><b>μ</b> average profit per window</li>
-<li><b>s</b> the typical swing between windows</li>
-<li><b>n</b> how many settled windows we have seen</li>
+<li><b>μ</b> average profit per window · <b>s</b> its typical swing from window to window · <b>n</b> settled windows so far (each defined carefully below)</li>
 <li><b>t</b> below 1 means "could easily be luck"; above 2 means "probably real"</li>
 </ul></div>
 <p>Notice the √n underneath. Doubling your evidence does not halve your doubt, it only reduces it by about 30%. This is why our go-live gate demands <b>200 settled windows</b>, roughly two days of trading, and a <b>t above 2</b>. It is also why a great morning means very little.</p>
@@ -1721,11 +1755,12 @@ function explainerHtml4(){return `
 <defs><marker id="exb" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 1 L6 3.5 L0 6" fill="var(--ink)"/></marker></defs>
 </svg>
 <p>Paper proves the logic. The sandbox proves the plumbing: real authentication, real order routing, real settlement, a ledger that matches the exchange to the cent. Only the third one proves the money.</p>
+<p>Today, paper runs every strategy in Part 4's table, the sandbox runs model and flat, and the live account is stopped. Part 12 has the current numbers from each.</p>
 
 <h2 id="ex-part-10">Part 10 · What we honestly do not know yet<a class="toc-up" href="#ex-toc" title="Back to the contents">&#8593; contents</a></h2>
 <p>Two questions cannot be answered by either of the first two worlds, and they are the two that decide whether any of this works.</p>
-<p><b>Will our orders actually get filled?</b> The simulation assumes that when the market trades at our price, we get a share of it. Over four windows where both ran side by side, the simulation filled 2,932 contracts and the sandbox filled 32. The sandbox is thin because almost nobody trades there, and the simulation may be generous. The truth is somewhere between, and only real money in the real order book will find it.</p>
-<p><b>Do the people trading with us know more than we do?</b> In a simulation nobody is trying to beat you. In the sandbox almost nobody is there at all. On the real exchange, everyone who takes our quote chose to. If our fills are systematically followed by the price moving against us, the edge is an illusion, and the markout tiles are where that will show up first.</p>
+<p><b>Will our orders actually get filled?</b> The simulation assumes that when the market trades at our price, we get a share of it. In an early check over four windows run side by side, the simulation filled 2,932 contracts and the sandbox 32. The sandbox is thin because almost nobody trades there, and the simulation may be generous. The truth is somewhere between, and only real money in the real order book will find it.</p>
+<p><b>Do the people trading with us know more than we do?</b> In a simulation nobody is trying to beat you. In the sandbox almost nobody is there at all. On the real exchange, everyone who takes our quote chose to. If our fills are systematically followed by the price moving against us, the edge is an illusion, and the markout tiles are where that will show up first. Part 12 shows what they say right now.</p>
 <p class="aside">This is why the first real-money day is deliberately small. Not because we expect it to fail, but because the two biggest unknowns can only be measured by doing it, and the cost of measuring should be the smallest number that still produces a real answer.</p>
 
 <h2 id="ex-part-11">Part 11 · How much could middle make at scale?<a class="toc-up" href="#ex-toc" title="Back to the contents">&#8593; contents</a></h2>
@@ -1798,16 +1833,22 @@ function explainerHtml4(){return `
 
 <p><b>The bottom line.</b> The market has room for roughly 10 to 30 times today's size before our own orders start changing it. What that size would earn depends almost entirely on <i>e</i>. <i>e</i> is 9 to 10¢ in this run, 1.7¢ over the whole history, and zero in its first half. Nothing here should be scaled on this run's numbers. The 200-window test comes first.</p>
 
+${watchHtml(EXP_P)}${todoHtml(EXP_P)}
 <h2 id="ex-cheat">A cheat sheet for the rest of this dashboard<a class="toc-up" href="#ex-toc" title="Back to the contents">&#8593; contents</a></h2>
 <div class="wrap"><table class="stack"><tr><th>what you see</th><th>what it means</th></tr>
 <tr><td class="rh">equity</td><td data-label="what it means">Cash plus whatever we are currently holding, valued at the market's price. The headline number.</td></tr>
-<tr><td class="rh">t-stat</td><td data-label="what it means">How sure we are the profit is skill. Under 1, assume luck. Over 2, start believing it.</td></tr>
+<tr><td class="rh">t-stat</td><td data-label="what it means">How many wobbles the average profit sits above zero (Part 8). Under 1, assume luck. Over 2, and staying there, start believing it.</td></tr>
 <tr><td class="rh">¢ per contract</td><td data-label="what it means">Average profit per contract after fees. This is the number that scales with size.</td></tr>
 <tr><td class="rh">markouts</td><td data-label="what it means">Where the price went right after our fills. Negative and persistent is the early warning.</td></tr>
-<tr><td class="rh">standing aside</td><td data-label="what it means">We agree with the market to within two cents, so we are posting nothing. Normal and good.</td></tr>
+<tr><td class="rh">standing aside</td><td data-label="what it means">Our fair value is within the strategy's threshold of the market (2¢ for most, 3¢ for 3c), so it posts nothing. Normal and good.</td></tr>
 <tr><td class="rh">bankroll</td><td data-label="what it means">The number the sizing rule scales sizes with: a strategy's allocation plus its own earnings put back at risk, less what it gave back. Not the account balance - paying money in does not change it.</td></tr>
 <tr><td class="rh">paid in</td><td data-label="what it means">Money you added to the exchange account yourself. It moves invested capital, never P&L.</td></tr>
 <tr><td class="rh">unexplained (inferred)</td><td data-label="what it means">The bot found a difference between the exchange's balance and its own books and recorded it. It cannot tell a deposit from an accounting error, so until a person confirms it, it is not a claim that anyone moved money.</td></tr>
+<tr><td class="rh">per window</td><td data-label="what it means">Average result per settled window, including windows with no trades (they count as $0), with its typical swing (±).</td></tr>
+<tr><td class="rh">Δt and the dots</td><td data-label="what it means">t minus where t should be by now if the strategy had just enough edge to pass its test on schedule. Dark red: t below 0. Red: behind schedule. Green: on or ahead. Dark green with a white centre: more than 1 ahead.</td></tr>
+<tr><td class="rh">t vs gate</td><td data-label="what it means">The strategy's t after every settled window (black) against that schedule (green).</td></tr>
+<tr><td class="rh">windows settled · win</td><td data-label="what it means">Windows since the run started; under it, the share of traded windows that made money.</td></tr>
+<tr><td class="rh">max drawdown</td><td data-label="what it means">The worst fall from a high point to a later low, in dollars and as a share of the high.</td></tr>
 <tr><td class="rh">banked</td><td data-label="what it means">Profit deliberately taken off the table and never risked again.</td></tr>
 <tr><td class="rh">reconciliation</td><td data-label="what it means">Our books checked against the exchange. If this ever says BROKEN, trust nothing else on the page.</td></tr>
 </table></div>
@@ -1824,7 +1865,7 @@ const VIEWS=H.views||{};const VNAMES=Object.keys(VIEWS).filter(k=>k!=='aggregate
 const jobs=((EXCH&&RT.jobs)?RT.jobs:(P.jobs||[])).filter(j=>/crypto_mm|conviction|live_server|status_page|watchdog/.test(j.job)).map(j=>`<span class="pill ${j.ok?'ok':'bad'}" data-tip="${j.job}: heartbeat ${j.age_min==null?'never':j.age_min+' min ago'}">${({crypto_mm_btc:'bot',conviction_dashboard:'dashboard',conviction_publish:'publisher',crypto_server:'dashboard',live_server:'main server',status_page:'status page',watchdog:'watchdog'})[j.job]||j.job} ${j.ok?'OK':'DOWN'}</span>`).join(' ');
 const state=PL.halted?`<span class="pill bad">${PL.halted} halted</span>`:PL.half?`<span class="pill bad">${PL.half} at half size</span>`:`<span class="pill ok">full size</span>`;
 const viewBar=(VNAMES.length>1&&TAB!=='explainer')?`<span class="viewbar"><span class="small">view</span>${['aggregate',...VNAMES].map(n=>`<a href="#" data-view="${n}" class="${VIEW===n?'on':''}">${n}</a>`).join('')}<select class="viewsel${VIEW!=='aggregate'?' on':''}" data-viewsel aria-label="Strategy shown on this page">${['aggregate',...VNAMES].map(n=>`<option value="${n}"${VIEW===n?' selected':''}>${n}</option>`).join('')}</select></span>`:'';const tabs=tabBar;const navEl=$('#nav');if(navEl){const nh=tabs+viewBar;if(nh!==NAVHTML){navEl.innerHTML=nh;NAVHTML=nh;}navEl.hidden=false;}   // rebuilt only when it changes: the live refresh every 2 s would otherwise close an open picker
-if(TAB==='explainer'){$('#app').innerHTML=`<div class="top"><div><div class="eyebrow">Bitcoin · Kalshi 15-minute windows</div><h1>Conviction</h1></div></div>`+explainerHtml();return;}
+if(TAB==='explainer'){EXP_P=P;$('#app').innerHTML=`<div class="top"><div><div class="eyebrow">Bitcoin · Kalshi 15-minute windows</div><h1>Conviction</h1></div></div>`+explainerHtml();return;}
 const top=`<div class="top"><div><div class="eyebrow">Bitcoin · Kalshi 15-minute windows${ENVN==='demo'?' · KALSHI DEMO (mock money)':ENVN==='live'?' · LIVE ACCOUNT (real money)':' · PAPER SIMULATION'}</div><h1>Conviction</h1><p class="small" style="margin:6px 0 0">${ENVN==='demo'?'<b>Mock money</b> on Kalshi\'s demo sandbox - the real API and order path, play money - run exactly like the paper simulation. ':''}${LIVE?`<b>${REAL?'Real money':'Mock money'}</b> on Kalshi's ${REAL?'production':'demo sandbox'} environment${REAL?'':' (the real API and order path, play money)'}. Same code and rules as the paper simulation, promoted as a tagged release: one maker strategy (model) resting one-sided only where the model disagrees with the market by 2¢ or more, 40 contracts per window, loss tiers at −5% and −10% of the invested capital per day, a kill file that cancels everything. Fair value from a live composite of five exchanges.`:`Paper, the staging environment. Bitcoin on Kalshi's 15-minute up/down windows. One idea, nothing else: the strategies rest one-sided only where the model disagrees with the market by 2¢ or more. Fair value from a live composite of five exchanges.`} ${strategies.length} ${LIVE?'live':'paper'} ${strategies.length===1?'strategy':'strategies'} on ${LIVE?'invested capital of':'a'} $${(LIVE?(PL.start||0):(PL.equity_cfg||PL.start||10000)).toLocaleString()}${LIVE?'':' launch bankroll'}${PL.started?', since '+et(PL.started):''}${PL.hours?' ('+PL.hours+' h)':''} · ${bots} · ${MODE==='live'?'live, streaming every 2 s':'GitHub copy, refreshed every 15 min'} · updated <span id="upd" class="mono">just now</span></p></div><div style="text-align:right"><a href="#" id="lock">lock</a><div style="margin-top:6px">${jobs}</div></div></div>`;
 const SP=PL.split||{};const GB=(SP.given_back||0);const sh=(strategies[0]&&strategies[0].split?strategies[0].split.share:0.5);const perSplit=strategies.map(x=>`${x.name}: ${x.split?sgx(x.split.reinvested):'—'} reinvested, ${x.split?sgx(x.split.banked):'—'} banked${x.split&&x.split.given_back<0?', '+sgx(x.split.given_back)+' given back':''}`).join(' · ');
 const SPA=(SP.alloc!=null?SP.alloc:strategies.reduce((a,x)=>a+(((x.split||{}).alloc!=null)?x.split.alloc:(x.alloc||x.start||0)),0));const SPB=(SP.bankroll!=null?SP.bankroll:SPA+(SP.reinvested||0)+GB);const CI=PL.capital_inferred||0;const mid0=(Object.values(coins)[0]||{}).mid;const openNotional=strategies.reduce((a,x)=>a+Math.abs(+x.inv||0)*(mid0!=null?(+x.inv<0?1-mid0:mid0):0.5),0);const openContracts=strategies.reduce((a,x)=>a+Math.abs(+x.inv||0),0);
